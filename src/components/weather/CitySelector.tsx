@@ -13,7 +13,7 @@ const CitySelector: React.FC<CitySelectorProps> = ({
     <select
       value={selectedCity}
       onChange={handleCityChange}
-      className="bg-inherit"
+      className="bg-inherit mb-0.5"
     >
       <option value={"Seoul"}>서울</option>
       <option value={"Incheon"}>인천</option>

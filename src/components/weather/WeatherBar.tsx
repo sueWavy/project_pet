@@ -62,26 +62,25 @@ const WeatherBar: React.FC = () => {
   const weatherIconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
 
   return (
-    <section className="flex items-center justify-center list-none text-sm bg-slate-300 sm:flex-wrap sm:text-xs sm:p-1">
-      <div className="flex">
-        <div className="flex items-center">
-          오늘의
+    <section className="flex-col items-center justify-center list-none bg-slate-300 font-['SejonghospitalBold'] sm:flex-wrap sm:text-xs sm:p-1">
+      <div className="flex justify-center">
+        <div className="flex items-center text-lg">
+          오늘의 산책 날씨
           <CitySelector
             selectedCity={selectedCity}
             handleCityChange={handleCityChange}
           />
-          날씨
         </div>
         <div className="flex items-center">
-          <img src={weatherIconUrl} alt="Weather Icon" className="w-10" />
-          <p>{weather[0].description}</p>
+          <img src={weatherIconUrl} alt="Weather Icon" className="w-12 h-12" />
+          <p className="text-lg">{weather[0].description}</p>
         </div>
       </div>
-      <div className="flex ml-2 space-x-3 ">
+      <div className="flex ml-2 space-x-3 text-sm justify-center ">
         <li>온도 : {celsiusTemp}°C</li>
         <li>체감 온도 : {Math.round(feels_like - 273.15)}°C</li>
         <li>습도 : {humidity}%</li>
-        <li>바람 : {speed} m/s</li>
+        <li>바람 : {speed}m/s</li>
         <li>구름 양 : {all}%</li>
       </div>
     </section>
