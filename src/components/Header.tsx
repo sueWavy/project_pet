@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="w-full h-14 flex items-center justify-around bg-orange-500 text-xl dark:bg-black">
+    <header className="w-full h-14 flex items-center justify-around bg-orange-400 text-xl dark:bg-black">
       <h1 className="text-white items-center font-['GoryeongStrawberry'] cursor-pointer">
         <Link to="/" className="flex">
           Mung Meeting &nbsp;
