@@ -12,7 +12,8 @@ interface WeatherData {
 }
 
 const WeatherBar: React.FC = () => {
-  const apiKey: any | undefined = import.meta.env.REACT_APP_WEATHER_API_KEY;
+  const apiKey: any | undefined = import.meta.env
+    .VITE_REACT_APP_WEATHER_API_KEY;
 
   const [data, setData] = useState<WeatherData | null>(null);
   const [selectedCity, setSelectedCity] = useState("Seoul");
