@@ -52,6 +52,8 @@ const WeatherBar: React.FC = () => {
     clouds: { all },
   } = data;
 
+  const list_border = "border-r pr-3 dark:border-black sm:border-none";
+
   // 절대온도 -> 섭씨온도로 변경
   const celsiusTemp = Math.round(((temp - 273.15) * 10) / 10);
 
@@ -62,26 +64,40 @@ const WeatherBar: React.FC = () => {
   const weatherIconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
 
   return (
-    <section className="flex-col items-center justify-center list-none bg-slate-300 font-['SejonghospitalBold'] sm:flex-wrap sm:text-xs sm:p-1">
-      <div className="flex justify-center">
-        <div className="flex items-center text-lg">
-          오늘의 산책 날씨
-          <CitySelector
-            selectedCity={selectedCity}
-            handleCityChange={handleCityChange}
-          />
+    <section className="relative overflow-hidden pb-2 bg-green-400  dark:bg-yellow-200 flex-col items-center justify-center list-none font-['SejonghospitalBold'] sm:flex-wrap sm:text-xs sm:p-1">
+      {/* bg-animation */}
+      <div className="wave -one"></div>
+      <div className="wave -two"></div>
+      <div className="wave -three"></div>
+
+      {/* contents */}
+      <div className="title">
+        <div className="flex justify-center items-center">
+          <div className="flex items-center text-xl dark:text-black pt-3 sm:p-0">
+            오늘의 산책 날씨
+            <CitySelector
+              selectedCity={selectedCity}
+              handleCityChange={handleCityChange}
+            />
+          </div>
+          <div className="flex items-center mt-3 dark:text-black sm:pb-3">
+            <img
+              src={weatherIconUrl}
+              alt="Weather Icon"
+              className="w-12 h-12"
+            />
+            <p className="text-lg sm:pb-1">{weather[0].description}</p>
+          </div>
         </div>
-        <div className="flex items-center">
-          <img src={weatherIconUrl} alt="Weather Icon" className="w-12 h-12" />
-          <p className="text-lg">{weather[0].description}</p>
+        <div className="flex pb-2 space-x-3 text-sm justify-center dark:text-black sm:hidden">
+          <li className={list_border}>온도:{celsiusTemp}°C</li>
+          <li className={list_border}>
+            체감온도:{Math.round(feels_like - 273.15)}°C
+          </li>
+          <li className={list_border}>습도:{humidity}%</li>
+          <li className={list_border}>바람:{speed}m/s</li>
+          <li>구름양:{all}%</li>
         </div>
-      </div>
-      <div className="flex ml-2 space-x-3 text-sm justify-center ">
-        <li>온도 : {celsiusTemp}°C</li>
-        <li>체감 온도 : {Math.round(feels_like - 273.15)}°C</li>
-        <li>습도 : {humidity}%</li>
-        <li>바람 : {speed}m/s</li>
-        <li>구름 양 : {all}%</li>
       </div>
     </section>
   );

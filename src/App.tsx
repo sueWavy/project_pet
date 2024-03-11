@@ -26,11 +26,11 @@ function App() {
   console.log(window.kakao);
 
   return (
-    <>
+    <div className="bg-slate-100 dark:bg-gray-400">
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }
 
