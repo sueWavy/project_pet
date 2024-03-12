@@ -41,7 +41,6 @@ const WeatherBar: React.FC = () => {
 
   if (data === null) {
     // 데이터가 도착하지 않았을 때
-    console.log("데이터 나와라", url);
     return <Loader />;
   }
 
@@ -88,9 +87,6 @@ const WeatherBar: React.FC = () => {
             />
             <p className="text-lg sm:hidden">{weather[0].description}</p>
           </div>
-          <p className="text-lg hidden sm:pb-1 sm:block dark:text-black">
-            {weather[0].description}
-          </p>
         </div>
         <div className="flex pb-2 space-x-3 text-sm justify-center dark:text-black sm:hidden">
           <li className={list_border}>온도:{celsiusTemp}°C</li>
