@@ -72,7 +72,7 @@ const WeatherBar: React.FC = () => {
 
       {/* contents */}
       <div className="title">
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center sm:flex-col">
           <div className="flex items-center text-xl dark:text-black pt-3 sm:p-0">
             오늘의 산책 날씨
             <CitySelector
@@ -86,8 +86,11 @@ const WeatherBar: React.FC = () => {
               alt="Weather Icon"
               className="w-12 h-12"
             />
-            <p className="text-lg sm:pb-1">{weather[0].description}</p>
+            <p className="text-lg sm:hidden">{weather[0].description}</p>
           </div>
+          <p className="text-lg hidden sm:pb-1 sm:block dark:text-black">
+            {weather[0].description}
+          </p>
         </div>
         <div className="flex pb-2 space-x-3 text-sm justify-center dark:text-black sm:hidden">
           <li className={list_border}>온도:{celsiusTemp}°C</li>
