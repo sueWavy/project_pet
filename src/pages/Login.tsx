@@ -1,20 +1,19 @@
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
+import { GoogleLogin } from "@react-oauth/google";
 import dogVideo from "../assets/dog.mp4";
 import useLogin from "../hooks/useLogin";
 
 export default function Login() {
   // style code
-  const inputStyle =
-    "border-solid border-slate-300 border-2 rounded-2xl p-1 text-center";
-
   const boxStyle =
-    "w-96 flex flex-col items-center justify-center rounded-2xl p-4 bg-white space-y-3 relative z-10 dark:bg-slate-800 dark:opacity-90 dark:text-white";
+    "w-96 flex flex-col items-center justify-center rounded-2xl p-4 bg-white space-y-3 relative z-10 dark:bg-slate-600 dark:opacity-90 dark:text-white";
 
-  const { login } = useLogin();
+  // function code
+  const { kakaoLogin } = useLogin();
 
   const handleLogin = async () => {
-    await login();
+    await kakaoLogin();
     window.location.reload();
   };
 
@@ -35,16 +34,27 @@ export default function Login() {
         </div>
         <div className="flex flex-col space-y-3">
           <div className="flex items-center space-x-2 justify-center cursor-pointer">
-            <FcGoogle /> <span>구글로 로그인하기</span>
+            {/* <FcGoogle /> <span>구글로 로그인하기</span> */}
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
           </div>
 
-          <p className="text-center text-slate-400">⎯⎯⎯⎯ 또는 ⎯⎯⎯⎯</p>
+          <p className="text-center text-slate-400 dark:text-slate-300">
+            ⎯⎯⎯⎯ 또는 ⎯⎯⎯⎯
+          </p>
           <div>
             <div
-              className="flex items-center space-x-2 justify-center cursor-pointer"
+              className="text-black flex mb-2 items-center space-x-2 justify-center cursor-pointer rounded-md bg-white border p-1.5 hover:border-sky-200 hover:bg-sky-50"
               onClick={handleLogin}
             >
-              <RiKakaoTalkFill /> <span>카카오로 로그인하기</span>
+              <RiKakaoTalkFill />
+              <span>카카오로 로그인하기</span>
             </div>
           </div>
         </div>

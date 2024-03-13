@@ -6,7 +6,8 @@ const useLogin = () => {
   const navigate = useNavigate();
   const [loginStatus, setLoginStatus] = useState(false);
 
-  const login = async () => {
+  /** 카카오 로그인 */
+  const kakaoLogin = async () => {
     const code = location.search.split("code=")[1];
     const form = new FormData();
     form.append("mode", "kakao");
@@ -37,7 +38,7 @@ const useLogin = () => {
     alert("로그아웃 했습니다");
   };
 
-  return { login, logout, loginStatus };
+  return { kakaoLogin, logout, loginStatus };
 };
 
 export default useLogin;
