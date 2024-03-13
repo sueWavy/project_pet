@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import dogVideo from "../assets/dog.mp4";
@@ -13,6 +12,11 @@ export default function Login() {
     "w-96 flex flex-col items-center justify-center rounded-2xl p-4 bg-white space-y-3 relative z-10 dark:bg-slate-800 dark:opacity-90 dark:text-white";
 
   const { login } = useLogin();
+
+  const handleLogin = async () => {
+    await login();
+    window.location.reload();
+  };
 
   // layout
   return (
@@ -38,7 +42,7 @@ export default function Login() {
           <div>
             <div
               className="flex items-center space-x-2 justify-center cursor-pointer"
-              onClick={login}
+              onClick={handleLogin}
             >
               <RiKakaoTalkFill /> <span>카카오로 로그인하기</span>
             </div>

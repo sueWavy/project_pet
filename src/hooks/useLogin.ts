@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const useLogin = () => {
-  const location = useLocation();
-  const [loginStatus, setLoginStatus] = useState("");
+  const navigate = useNavigate();
+  const [loginStatus, setLoginStatus] = useState(false);
 
   const login = async () => {
     const code = location.search.split("code=")[1];
@@ -18,14 +18,26 @@ const useLogin = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      setLoginStatus(res.data);
+      setLoginStatus(true);
+      const token = res.data.token;
+      localStorage.setItem("token", token);
+      navigate("/", { replace: true });
+      alert("로그인 했습니다");
+
       console.log(res);
     } catch (error) {
       console.error("Login error:", error);
     }
   };
 
-  return { login, loginStatus };
+  const logout = () => {
+    setLoginStatus((prev) => !prev);
+    localStorage.removeItem("token");
+    navigate("/", { replace: true });
+    alert("로그아웃 했습니다");
+  };
+
+  return { login, logout, loginStatus };
 };
 
 export default useLogin;

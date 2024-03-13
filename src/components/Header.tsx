@@ -1,11 +1,13 @@
-import React from "react";
-import { MdPets } from "react-icons/md";
 import ThemeButton from "./ThemeBtn";
+import { MdPets } from "react-icons/md";
 import { Link } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 const hoverStyle = "cursor-pointer hover:text-2xl";
 
 export default function Header() {
+  const { logout, loginStatus } = useLogin();
+
   return (
     <header className="w-full h-14 flex items-center justify-around bg-brand text-xl dark:bg-black sm:flex-col sm:h-20">
       <h1
@@ -23,9 +25,15 @@ export default function Header() {
           <ThemeButton />
         </li>
         <li className={hoverStyle}>글쓰기</li>
-        <li className={hoverStyle}>
-          <Link to="/login">로그인</Link>
-        </li>
+        {loginStatus ? (
+          <li className={hoverStyle}>
+            <Link to="/login">로그인</Link>
+          </li>
+        ) : (
+          <li className={hoverStyle} onClick={logout}>
+            로그아웃
+          </li>
+        )}
         <li className={hoverStyle}>마이페이지</li>
       </ul>
     </header>
