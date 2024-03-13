@@ -29,7 +29,7 @@ export default function Home() {
       <section className="w-3/4 justify-center flex-col items-center l:w-full">
         <WeatherBar />
         <SearchBar />
-        <div className="flex-grow h-96 bg-slate-700">
+        <div className="flex-grow h-96 bg-white">
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       </section>

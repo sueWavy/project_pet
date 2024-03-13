@@ -1,9 +1,16 @@
 import React from "react";
 
 export default function SearchBar() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="flex justify-center items-center">
-      <form className="w-full p-5 bg-slate-600 flex items-center justify-center">
+      <form
+        className="w-full p-5 bg-slate-600 flex items-center justify-center"
+        onSubmit={handleSubmit}
+      >
         <div className="flex items-center h-8 bg-sky-600 rounded-xl dark:bg-gray-800">
           <select
             name="searchFilter"

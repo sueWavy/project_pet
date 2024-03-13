@@ -29,12 +29,15 @@ module.exports = {
     extend: {
       screens: {
         s: { max: "628px" },
-        sm: { max: "830px" },
+        sm: { max: "820px" },
         md: { max: "1070px" },
         l: { max: "1600px" },
       },
       colors: {
         brand: "#3D89D0",
+      },
+      boxShadow: {
+        outline: "0 0 0 3px rgba(255, 255, 255, 0.5)",
       },
     },
   },
