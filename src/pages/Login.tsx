@@ -12,6 +12,8 @@ export default function Login() {
   const boxStyle =
     "w-96 flex flex-col items-center justify-center rounded-2xl p-4 bg-white space-y-3 relative z-10 dark:bg-slate-800 dark:opacity-90 dark:text-white";
 
+  const { login } = useLogin();
+
   // layout
   return (
     <div className="relative w-full h-screen flex flex-col justify-center items-center space-y-5">
@@ -36,7 +38,7 @@ export default function Login() {
           <div>
             <div
               className="flex items-center space-x-2 justify-center cursor-pointer"
-              onClick={useLogin}
+              onClick={login}
             >
               <RiKakaoTalkFill /> <span>카카오로 로그인하기</span>
             </div>
