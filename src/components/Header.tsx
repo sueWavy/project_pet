@@ -6,7 +6,9 @@ import useLogin from "../hooks/useLogin";
 const hoverStyle = "cursor-pointer hover:text-2xl";
 
 export default function Header() {
-  const { logout, loginStatus } = useLogin();
+  const { logout } = useLogin();
+  const isToken = localStorage.getItem("token");
+  console.log(isToken);
 
   return (
     <header className="w-full h-14 flex items-center justify-around bg-brand text-xl dark:bg-black sm:flex-col sm:h-20">
@@ -25,7 +27,7 @@ export default function Header() {
           <ThemeButton />
         </li>
         <li className={hoverStyle}>글쓰기</li>
-        {loginStatus ? (
+        {isToken === null ? (
           <li className={hoverStyle}>
             <Link to="/login">로그인</Link>
           </li>

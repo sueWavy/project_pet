@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const [loginStatus, setLoginStatus] = useState(false);
 
   /** 카카오 로그인 */
   const kakaoLogin = async () => {
@@ -19,7 +18,6 @@ const useLogin = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      setLoginStatus(true);
       const token = res.data.token;
       localStorage.setItem("token", token);
       navigate("/", { replace: true });
@@ -32,13 +30,12 @@ const useLogin = () => {
   };
 
   const logout = () => {
-    setLoginStatus((prev) => !prev);
     localStorage.removeItem("token");
     navigate("/", { replace: true });
     alert("로그아웃 했습니다");
   };
 
-  return { kakaoLogin, logout, loginStatus };
+  return { kakaoLogin, logout };
 };
 
 export default useLogin;
