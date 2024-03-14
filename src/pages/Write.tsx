@@ -52,13 +52,6 @@ export default function Write() {
               readOnly={true}
             />
           </li>
-          <li>
-            <input
-              type="text"
-              className="w-full placeholder:text-center py-2 text-center"
-              placeholder="상세 주소를 입력해주세요"
-            />
-          </li>
           <li className="relative time-picker">
             <p className="w-full bg-white rounded-tl-md rounded-tr-md pt-2 -mb-1 pb-1">
               우리가 산책할 시간은

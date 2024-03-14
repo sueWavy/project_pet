@@ -31,6 +31,7 @@ module.exports = {
         s: { max: "628px" },
         sm: { max: "820px" },
         md: { max: "1070px" },
+        ml: { max: "1255px" },
         l: { max: "1600px" },
       },
       colors: {
