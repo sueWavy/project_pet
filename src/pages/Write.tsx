@@ -28,7 +28,7 @@ export default function Write() {
         <h1 className="mb-10 s:text-2xl font-['YEONGJUPunggiGinsengTTF'] text-sky-500 dark:text-slate-200 dark:bg-gray-900 text-3xl shadow-lg bg-white p-5 rounded-3xl">
           🐶 산책 메이트를 구해볼까요
         </h1>
-        <ul className="p-4 space-y-3 text-center w-3/5 md:w-3/4 sm:w-full bg-opacity-70 dark:bg-opacity-70 bg-blue-300 dark:bg-slate-800 rounded-2xl shadow-2xl">
+        <ul className="p-4 space-y-3 text-center w-3/5 md:w-3/4 sm:w-full sm:p-1 bg-opacity-70 dark:bg-opacity-70 bg-blue-300 dark:bg-slate-800 rounded-2xl shadow-2xl">
           <li>
             <input
               className="w-full placeholder:text-center h-16 text-center rounded-tl-lg rounded-tr-lg"

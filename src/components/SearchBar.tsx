@@ -31,8 +31,8 @@ export default function SearchBar() {
           </button>
         </div>
         <button className="ml-3 bg-sky-600 py-1 px-4 text-white rounded-2xl dark:bg-gray-800">
-          <span className="hidden sm:inline">♥</span>
-          <span className="sm:hidden">관심 메이트만 보기</span>
+          <span className="hidden sm:inline hover:text-red-500">♥</span>
+          <span className="sm:hidden hover:text-red-">관심 메이트만 보기</span>
         </button>
       </form>
     </div>
