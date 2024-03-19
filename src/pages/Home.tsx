@@ -1,6 +1,8 @@
 import WeatherBar from "../components/weather/WeatherBar";
 import SearchBar from "../components/SearchBar";
 import { useGetData } from "../hooks/useGetData";
+import AddInfo from "../components/AddInfo";
+import useLogin from "../hooks/useLogin";
 
 export default function Home() {
   // 데이터 전송 테스트
@@ -26,7 +28,8 @@ export default function Home() {
 
   return (
     <div className="w-full h-full flex justify-center items-center ">
-      <section className="w-3/4 justify-center flex-col items-center l:w-full">
+      <section className="relative w-3/4 justify-center flex-col items-center l:w-full">
+        <AddInfo />
         <WeatherBar />
         <SearchBar />
         <div className="flex-grow h-96 bg-white">

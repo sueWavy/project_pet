@@ -40,6 +40,9 @@ module.exports = {
       boxShadow: {
         outline: "0 0 0 3px rgba(255, 255, 255, 0.5)",
       },
+      maxHeight: {
+        custom: "700px",
+      },
     },
   },
   plugins: [],
