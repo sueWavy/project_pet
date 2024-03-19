@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
+import useLogin from "../hooks/useLogin";
 
 interface Pet {
-  list: number;
-  pets: number;
   name: string;
   kind: string;
   age: number;
@@ -12,9 +11,17 @@ interface Pet {
 }
 
 export default function AddInfo() {
+  const { logout } = useLogin();
+
   const [pets, setPets] = useState<number>(1);
 
-  const [petInfo, setPetInfo] = useState<Pet[]>([]);
+  const petName = useRef<HTMLInputElement>(null);
+  const petKind = useRef<HTMLInputElement>(null);
+  const petAge = useRef<HTMLInputElement>(null);
+
+  const [petInfo, setPetInfo] = useState<Pet[]>([
+    { name: "", kind: "", age: 0, gender: "male" },
+  ]);
 
   const onCrease = () => {
     setPets((prev) => prev + 1);
@@ -45,7 +52,28 @@ export default function AddInfo() {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const hasEmptyName = petInfo.some((pet) => pet.name.trim() === "");
+    const hasEmptyKind = petInfo.some((pet) => pet.kind.trim() === "");
+    const hasEmptyAge = petInfo.some((pet) => pet.age <= 0);
+
+    if (hasEmptyName) {
+      petName.current?.focus();
+      alert("이름을 기재해주세요");
+      return;
+    }
+    if (hasEmptyKind) {
+      petKind.current?.focus();
+      alert("종류를 기재해주세요");
+      return;
+    }
+    if (hasEmptyAge) {
+      petAge.current?.focus();
+      alert("나이를 기재해주세요");
+      return;
+    }
     console.log(petInfo, localStorage.token);
   };
 
@@ -57,8 +85,8 @@ export default function AddInfo() {
     "p-1 rounded-full placeholder:text-center text-center border-2";
 
   return (
-    <div className="absolute w-full max-h-custom top-24  dark:bg-slate-900 bg-white z-10 pt-20 pb-20 rounded-full shadow-md overflow-y-scroll">
-      <div className="text-center">
+    <div className="fixed w-2/4 sm:w-3/4  max-h-custom top-36  dark:bg-slate-900 bg-white z-30 pt-20 pb-20 rounded-full shadow-md overflow-y-scroll">
+      <form className="text-center">
         <p className="text-xl text-black dark:text-white">
           처음 접속하신 견주님이시군요
         </p>
@@ -87,6 +115,7 @@ export default function AddInfo() {
             </span>
             <li>
               <input
+                ref={petName}
                 type="text"
                 placeholder="반려견의 이름"
                 className={InputStyle}
@@ -96,6 +125,7 @@ export default function AddInfo() {
             </li>
             <li>
               <input
+                required
                 type="text"
                 placeholder="반려견의 품종"
                 className={InputStyle}
@@ -106,6 +136,7 @@ export default function AddInfo() {
             <li>
               <div className="flex justify-center items-center">
                 <input
+                  required
                   type="number"
                   placeholder="나이"
                   className={`${InputStyle} w-24 mr-2 h-11`}
@@ -113,13 +144,18 @@ export default function AddInfo() {
                   onChange={(e) => handleChange(e, index)}
                 />
                 <select
-                  className="w-24 h-11 bg-white rounded-full text-center border-2"
-                  id="gender"
+                  required
+                  className={`w-24 h-11 bg-white rounded-full text-center border-2 
+                  ${
+                    petInfo[index]?.gender === "female"
+                      ? "text-pink-500"
+                      : "text-blue-500"
+                  } `}
                   name="gender"
                   onChange={(e) => handleChange(e, index)}
                 >
-                  <option value="male">수컷</option>
-                  <option value="female">암컷</option>
+                  <option value="male">왕자</option>
+                  <option value="female">공주</option>
                 </select>
               </div>
             </li>
@@ -132,11 +168,14 @@ export default function AddInfo() {
           >
             등록하기
           </button>
-          <button className="dark:bg-orange-500 bg-brand text-white p-3 rounded-2xl">
+          <button
+            className="dark:bg-orange-500 bg-brand text-white p-3 rounded-2xl"
+            onClick={logout}
+          >
             돌아가기
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

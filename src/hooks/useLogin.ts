@@ -31,8 +31,7 @@ const useLogin = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/", { replace: true });
-    alert("로그아웃 했습니다");
+    navigate("/login", { replace: true });
   };
 
   return { kakaoLogin, logout };

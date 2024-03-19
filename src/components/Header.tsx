@@ -2,6 +2,7 @@ import ThemeButton from "./ThemeBtn";
 import { MdPets } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
+import AddInfo from "./AddInfo";
 
 const hoverStyle = "cursor-pointer hover:text-2xl";
 
@@ -28,7 +29,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full h-14 flex items-center justify-around bg-brand text-xl dark:bg-black sm:flex-col sm:h-20">
+    <header className="relative w-full h-14 flex items-center justify-around bg-brand text-xl dark:bg-black sm:flex-col sm:h-20">
       <h1
         className={`text-white items-center font-['YEONGJUPunggiGinsengTTF'] sm:pt-2 ${hoverStyle}`}
       >
@@ -59,6 +60,7 @@ export default function Header() {
           마이페이지
         </li>
       </ul>
+      {isToken && <AddInfo />}
     </header>
   );
 }
