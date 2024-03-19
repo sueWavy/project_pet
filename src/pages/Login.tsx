@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleLogin } from "@react-oauth/google";
 import dogVideo from "../assets/dog.mp4";
 import useLogin from "../hooks/useLogin";
+import AddInfo from "../components/AddInfo";
 
 export default function Login() {
   // style code
@@ -28,6 +29,7 @@ export default function Login() {
         className="object-cover object-center w-full h-full absolute inset-0 z-0"
       />
 
+      <AddInfo />
       <section className={boxStyle}>
         <div className="flex items-center space-x-1 text-2xl">
           <h1>로그인</h1>
