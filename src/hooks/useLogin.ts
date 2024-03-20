@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
+import { useUserStore } from "../store/User";
 
 const useLogin = () => {
   const navigate = useNavigate();
 
-  /** 카카오 로그인 */
+  const updateUserStore = useUserStore((state) => state.updateFirst);
+  const userLogout = useUserStore((state) => state.userLogout);
+
   const kakaoLogin = async () => {
     const code = location.search.split("code=")[1];
     const form = new FormData();
@@ -18,11 +20,12 @@ const useLogin = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(res);
+      console.log("서버 응답 확인 ( token, isFirst ) : ", res);
       const token = res.data.token;
       const isFirst = res.data.first;
-      localStorage.setItem("token", token);
-      localStorage.setItem("first", isFirst);
+
+      // userStore에 첫방문, 토큰 저장
+      updateUserStore(isFirst, token);
 
       navigate("/", { replace: true });
       alert("로그인 했습니다");
@@ -32,9 +35,10 @@ const useLogin = () => {
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("first");
+    // userStore 초기화 시키기
+    userLogout;
     navigate("/login", { replace: true });
+    window.location.reload();
   };
 
   return { kakaoLogin, logout };

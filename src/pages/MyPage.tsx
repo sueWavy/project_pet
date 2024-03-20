@@ -30,7 +30,6 @@ export default function MyPage() {
                 내 회원정보는
               </h3>
               <li>이름 : 김춘자</li>
-              <li>아이디 : userId</li>
               <li>이메일 : email@naver.com</li>
               <li>가입일자 : 2023-12-28</li>
             </ul>

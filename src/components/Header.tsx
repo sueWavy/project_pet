@@ -3,17 +3,23 @@ import { MdPets } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 import AddInfo from "./AddInfo";
+import { useUserStore } from "../store/User";
+import { useEffect } from "react";
 
 const hoverStyle = "cursor-pointer hover:text-2xl";
 
 export default function Header() {
   const { logout } = useLogin();
-  const isToken = localStorage.getItem("token");
+  const isLogin = useUserStore((state) => state.isLogin);
+  const isFirst = useUserStore((state) => state.isFirst);
+  const userData = useUserStore((state) => state);
+
+  console.log("유저 데이터 확인 : ", userData);
+
   const navigate = useNavigate();
-  console.log(isToken);
 
   const handleWrite = () => {
-    if (isToken === null) {
+    if (!isLogin) {
       alert("로그인 후 이용가능한 기능입니다");
     } else {
       navigate("/write");
@@ -21,10 +27,10 @@ export default function Header() {
   };
 
   const handleMyPage = () => {
-    if (isToken === null) {
+    if (!isLogin) {
       alert("로그인 후 이용가능한 기능입니다");
     } else {
-      navigate(`mypage/:${isToken}`);
+      navigate("mypage/:1");
     }
   };
 
@@ -47,7 +53,7 @@ export default function Header() {
         <li className={hoverStyle} onClick={handleWrite}>
           글쓰기
         </li>
-        {isToken === null ? (
+        {!isLogin ? (
           <li className={hoverStyle}>
             <Link to="/login">로그인</Link>
           </li>
@@ -60,7 +66,7 @@ export default function Header() {
           마이페이지
         </li>
       </ul>
-      {/* {localStorage.getItem("first") && <AddInfo />} */}
+      {isLogin && isFirst && <AddInfo />}
     </header>
   );
 }
