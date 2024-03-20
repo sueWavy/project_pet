@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
 
 const useLogin = () => {
   const navigate = useNavigate();
@@ -18,12 +18,14 @@ const useLogin = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log(res);
       const token = res.data.token;
+      const isFirst = res.data.first;
       localStorage.setItem("token", token);
+      localStorage.setItem("first", isFirst);
+
       navigate("/", { replace: true });
       alert("로그인 했습니다");
-
-      console.log(res);
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -31,6 +33,7 @@ const useLogin = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("first");
     navigate("/login", { replace: true });
   };
 

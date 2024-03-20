@@ -15,7 +15,7 @@ export default function SearchBar() {
           <select
             name="searchFilter"
             id="searchFilter"
-            className="bg-inherit text-white py-1 px-4 rounded-l-2xl appearance-none cursor-pointer outline-none text-center"
+            className="bg-inherit text-white py-1 px-4 rounded-l-2xl appearance-none cursor-pointer outline-none text-center border-none"
           >
             <option value={"lastest"}>최신순</option>
             <option value={"oldest"}>오래된순</option>

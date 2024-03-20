@@ -60,7 +60,7 @@ export default function Header() {
           마이페이지
         </li>
       </ul>
-      {isToken && <AddInfo />}
+      {/* {localStorage.getItem("first") && <AddInfo />} */}
     </header>
   );
 }

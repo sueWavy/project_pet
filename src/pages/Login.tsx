@@ -14,7 +14,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     await kakaoLogin();
-    window.location.reload();
+    // window.location.reload();
   };
 
   // layout
