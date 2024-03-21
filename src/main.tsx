@@ -12,7 +12,26 @@ import MyPage from "./pages/MyPage.tsx";
 import Write from "./pages/Write.tsx";
 import View from "./pages/View.tsx";
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 const queryClient = new QueryClient();
+
+const { Kakao } = window;
+
+const KAKAO_KEY: string | undefined = import.meta.env.VITE_REACT_APP_KAKAO_API;
+
+if (Kakao) {
+  if (!Kakao.isInitialized()) {
+    Kakao.init(KAKAO_KEY);
+    console.log(KAKAO_KEY);
+  }
+} else {
+  console.error("Kakao object is not defined.");
+}
 
 const GOOGLE_KEY: string | undefined = import.meta.env
   .VITE_REACT_APP_GOOGLE_API;

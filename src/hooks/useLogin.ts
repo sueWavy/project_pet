@@ -28,9 +28,9 @@ const useLogin = () => {
       updateUserStore(isFirst, token);
 
       navigate("/", { replace: true });
-      alert("로그인 했습니다");
+      // alert("로그인 했습니다");
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login error : ", error);
     }
   };
 
