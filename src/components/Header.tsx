@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 import AddInfo from "./AddInfo";
 import { useUserStore } from "../store/User";
-import { useEffect } from "react";
 
 const hoverStyle = "cursor-pointer hover:text-2xl";
 

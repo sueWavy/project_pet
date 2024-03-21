@@ -11,6 +11,7 @@ import Login from "./pages/Login.tsx";
 import MyPage from "./pages/MyPage.tsx";
 import Write from "./pages/Write.tsx";
 import View from "./pages/View.tsx";
+import KakaO from "./pages/Kakao.tsx";
 
 const { Kakao } = window;
 
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/login", element: <Login /> },
+      { path: "/kakao", element: <KakaO /> },
       { path: "/mypage/:id", element: <MyPage /> },
       { path: "/view/:id", element: <View /> },
       { path: "/write", element: <Write /> },

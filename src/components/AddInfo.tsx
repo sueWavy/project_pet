@@ -1,17 +1,20 @@
 import React, { useRef, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
+import { useUserStore } from "../store/User";
 import useLogin from "../hooks/useLogin";
+import axios from "axios";
 
-interface Pet {
+export interface Pet {
   name: string;
   kind: string;
   age: string;
   gender: string;
 }
 
-export default function AddInfo() {
+function AddInfo() {
   const { logout } = useLogin();
+  const { userKey } = useUserStore();
 
   const [pets, setPets] = useState<number>(1);
 
@@ -50,6 +53,25 @@ export default function AddInfo() {
       };
       return updatedPetInfo;
     });
+  };
+
+  const useAddPet = (petInfo: Pet[]) => {
+    console.log(userKey);
+
+    axios
+      .post(
+        "http://43.201.39.118/api/login",
+        {
+          mode: "additional",
+          list: petInfo,
+        },
+        {
+          headers: {
+            Authorization: "bearer " + userKey,
+          },
+        }
+      )
+      .then((res) => console.log(res.data));
   };
 
   const handleSubmit = (e: any) => {
@@ -169,7 +191,10 @@ export default function AddInfo() {
         <div className="flex justify-center mt-8 space-x-5">
           <button
             className="dark:bg-orange-400 bg-sky-500 text-white p-3 rounded-2xl hover:brightness-125"
-            onClick={handleSubmit}
+            onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+              useAddPet(petInfo);
+            }}
           >
             등록하기
           </button>
@@ -184,3 +209,5 @@ export default function AddInfo() {
     </div>
   );
 }
+
+export default AddInfo;

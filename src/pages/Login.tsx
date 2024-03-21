@@ -10,10 +10,10 @@ export default function Login() {
     "w-96 flex flex-col items-center justify-center rounded-2xl p-4 bg-white space-y-3 relative z-10 dark:bg-slate-600 dark:opacity-90 dark:text-white";
 
   // function code
-  const { kakaoLogin } = useLogin();
+  const { kakaoLogin, loginWithKakao } = useLogin();
 
   const handleLogin = async () => {
-    await kakaoLogin();
+    await loginWithKakao();
     // window.location.reload();
   };
 

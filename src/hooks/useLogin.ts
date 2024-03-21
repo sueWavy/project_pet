@@ -3,13 +3,6 @@ import axios from "axios";
 import { useUserStore } from "../store/User";
 
 const useLogin = () => {
-  const { Kakao } = window;
-
-  Kakao.Auth.authorize({
-    redirectUri: "http://localhost:3000/login",
-    state: "username",
-  });
-
   const navigate = useNavigate();
 
   const updateUserStore = useUserStore((state) => state.updateFirst);
@@ -48,7 +41,16 @@ const useLogin = () => {
     window.location.reload();
   };
 
-  return { kakaoLogin, logout };
+  const loginWithKakao = () => {
+    const { Kakao } = window;
+
+    Kakao.Auth.authorize({
+      redirectUri: "http://localhost:5173/kakao",
+      state: "username",
+    });
+  };
+
+  return { kakaoLogin, logout, loginWithKakao };
 };
 
 export default useLogin;
