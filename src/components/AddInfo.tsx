@@ -1,9 +1,9 @@
+import axios from "axios";
+import useLogin from "../hooks/useLogin";
 import React, { useRef, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
 import { useUserStore } from "../store/User";
-import useLogin from "../hooks/useLogin";
-import axios from "axios";
 
 export interface Pet {
   name: string;
@@ -55,7 +55,7 @@ function AddInfo() {
     });
   };
 
-  const useAddPet = (petInfo: Pet[]) => {
+  const AddPet = (petInfo: Pet[]) => {
     console.log(userKey);
 
     axios
@@ -71,7 +71,7 @@ function AddInfo() {
           },
         }
       )
-      .then((res) => console.log(res.data));
+      .then((res) => console.log("펫 정보 등록", res.data));
   };
 
   const handleSubmit = (e: any) => {
@@ -93,7 +93,7 @@ function AddInfo() {
       petAge.current?.focus();
       return;
     }
-    console.log(petInfo, localStorage.token);
+    AddPet(petInfo);
   };
 
   //   Style
@@ -192,8 +192,7 @@ function AddInfo() {
           <button
             className="dark:bg-orange-400 bg-sky-500 text-white p-3 rounded-2xl hover:brightness-125"
             onClick={(e: React.MouseEvent) => {
-              e.preventDefault();
-              useAddPet(petInfo);
+              handleSubmit;
             }}
           >
             등록하기

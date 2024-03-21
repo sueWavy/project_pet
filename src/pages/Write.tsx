@@ -1,12 +1,111 @@
+import axios from "axios";
+import { useState } from "react";
+import { useUserStore } from "../store/User";
+
+interface Feed {
+  key: string;
+  title: string;
+  img: string;
+  address: string;
+  date: string;
+  time: string;
+  content: string;
+  likes: number;
+}
+
 export default function Write() {
+  const key = useUserStore((state) => state.userKey);
+
+  const [write, setWrite] = useState<Feed>({
+    key: "",
+    title: "",
+    img: "",
+    address: "",
+    date: "",
+    time: "",
+    content: "",
+    likes: 0,
+  });
+
+  // 현재 시간 구하기
+  const currentDate = new Date().toLocaleString("ko-KR", {
+    timeZone: "Asia/Seoul",
+  });
+  console.log(currentDate);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    // 이미지 파일 base64로 변환하기
+    const { name, files } = e.target as HTMLInputElement;
+
+    if (name === "img" && files && files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Data = reader.result as string;
+        setWrite((prevWrite) => ({
+          ...prevWrite,
+          img: base64Data,
+        }));
+      };
+      reader.readAsDataURL(files[0]);
+
+      // 이미지 파일이 아닌 경우 입력값 업데이트
+    } else {
+      setWrite((prevWrite) => ({
+        ...prevWrite,
+        key: key,
+        date: currentDate,
+        [e.target.name]: e.target.value,
+      }));
+      console.log(write);
+    }
+  };
+
+  /** 다음 주소찾기 API */
+  const onClickAddr = () => {
+    window.daum.postcode.load(() => {
+      const postcode = new window.daum.Postcode({
+        oncomplete: function (data: any) {
+          console.log(data);
+          setWrite((prevWrite) => ({
+            ...prevWrite,
+            address: data.address,
+          }));
+        },
+      });
+      postcode.open();
+    });
+  };
+
+  const AddFeed = (petInfo: Feed) => {
+    axios
+      .post(
+        "http://43.201.39.118/api/feed",
+        {
+          mode: "write",
+          list: write,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => console.log("펫 정보 등록", res.data));
+  };
+
+  // 다크 모드 확인
   const isDark = localStorage.getItem("theme");
 
-  console.log(isDark);
-
+  // 다크 모드 상태에 다라 배경 이미지 변경
   const getBackImg = () => {
     if (isDark === "dark") {
       return "https://cdn.pixabay.com/photo/2020/11/22/16/58/road-5767221_1280.jpg";
@@ -34,22 +133,38 @@ export default function Write() {
               className="w-full placeholder:text-center h-16 text-center rounded-tl-lg rounded-tr-lg"
               type="text"
               placeholder="제목을 입력하세요"
+              name="title"
+              onChange={handleChange}
             />
           </li>
           <li className="bg-white py-2 rounded-md">
-            <input type="image" value="&nbsp;이미지 첨부" />
+            <input
+              type="file"
+              accept="image/*"
+              name="img"
+              onChange={handleChange}
+            />
           </li>
           <li>
-            <button className="bg-white w-full py-2 rounded-md">
+            <button
+              className="bg-white w-full py-2 rounded-md"
+              onClick={onClickAddr}
+            >
               주소 찾기
             </button>
           </li>
           <li>
+            <li>
+              <p className="bg-yellow-200">지도</p>
+              <img src="" alt="" />
+            </li>
             <input
               type="text"
-              className="w-full placeholder:text-center py-4"
+              className="w-full placeholder:text-center py-4 text-center"
               placeholder="주소 내용"
+              value={write.address}
               readOnly={true}
+              name="address"
             />
           </li>
           <li className="relative time-picker">
@@ -60,14 +175,17 @@ export default function Write() {
               id="time"
               className="w-full text-center py-2 rounded-md"
               type="time"
+              name="time"
+              onChange={handleChange}
             />
           </li>
           <li>
             <textarea
               className="w-full min-h-72 placeholder:text-center text-start p-2 outline-none"
-              name="content"
               id="content"
               placeholder="본문 내용을 입력해주세요"
+              name="content"
+              onChange={handleChange}
             />
           </li>
           <li>

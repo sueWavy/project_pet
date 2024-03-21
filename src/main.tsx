@@ -18,6 +18,7 @@ const { Kakao } = window;
 declare global {
   interface Window {
     Kakao: any;
+    daum: any;
   }
 }
 
@@ -29,7 +30,6 @@ const GOOGLE_KEY: string | undefined = import.meta.env
 if (Kakao) {
   if (!Kakao.isInitialized()) {
     Kakao.init(KAKAO_KEY);
-    console.log(KAKAO_KEY);
   }
 } else {
   console.error("Kakao object is not defined.");

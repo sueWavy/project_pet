@@ -2,7 +2,6 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { GoogleLogin } from "@react-oauth/google";
 import dogVideo from "../assets/dog.mp4";
 import useLogin from "../hooks/useLogin";
-import AddInfo from "../components/AddInfo";
 
 export default function Login() {
   // style code
@@ -10,7 +9,7 @@ export default function Login() {
     "w-96 flex flex-col items-center justify-center rounded-2xl p-4 bg-white space-y-3 relative z-10 dark:bg-slate-600 dark:opacity-90 dark:text-white";
 
   // function code
-  const { kakaoLogin, loginWithKakao } = useLogin();
+  const { loginWithKakao } = useLogin();
 
   const handleLogin = async () => {
     await loginWithKakao();
