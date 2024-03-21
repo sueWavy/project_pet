@@ -12,17 +12,18 @@ import MyPage from "./pages/MyPage.tsx";
 import Write from "./pages/Write.tsx";
 import View from "./pages/View.tsx";
 
+const { Kakao } = window;
+
 declare global {
   interface Window {
     Kakao: any;
   }
 }
 
-const queryClient = new QueryClient();
-
-const { Kakao } = window;
-
 const KAKAO_KEY: string | undefined = import.meta.env.VITE_REACT_APP_KAKAO_API;
+
+const GOOGLE_KEY: string | undefined = import.meta.env
+  .VITE_REACT_APP_GOOGLE_API;
 
 if (Kakao) {
   if (!Kakao.isInitialized()) {
@@ -33,8 +34,7 @@ if (Kakao) {
   console.error("Kakao object is not defined.");
 }
 
-const GOOGLE_KEY: string | undefined = import.meta.env
-  .VITE_REACT_APP_GOOGLE_API;
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
