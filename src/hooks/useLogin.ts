@@ -1,42 +1,70 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store/User";
+import axios from "axios";
 
 const useLogin = () => {
   const navigate = useNavigate();
-
-  const updateUserStore = useUserStore((state) => state.updateFirst);
+  const updateUserStore = useUserStore((state) => state.updateUser);
   const userLogout = useUserStore((state) => state.userLogout);
+  const userInfo = useUserStore();
 
   const kakaoLogin = async () => {
-    const code = location.search.split("code=")[1];
-    const form = new FormData();
-    form.append("mode", "kakao");
-    form.append("code", code);
-
     try {
+      const code = location.search.split("code=")[1];
+      const form = new FormData();
+      form.append("mode", "kakao");
+      form.append("code", code);
+
       const res = await axios.post("http://43.201.39.118/api/login", form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("서버 응답 확인 ( token, isFirst ) : ", res);
+
       const token = res.data.token;
       const isFirst = res.data.first;
 
-      // userStore에 첫방문, 토큰 저장
-      updateUserStore(isFirst, token);
+      updateUserStore({
+        isLogin: true,
+        isFirst: isFirst,
+        userKey: token,
+      });
 
+      updateUser(token);
       navigate("/", { replace: true });
-      // alert("로그인 했습니다");
     } catch (error) {
       console.error("Login error : ", error);
     }
   };
 
+  const updateUser = (token: any) => {
+    axios
+      .get("http://43.201.39.118/api/me", {
+        headers: {
+          Authorization: "bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log("카카오 정보 : ", res.data);
+        updateUserStore({
+          email: res.data.data.email,
+          name: res.data.data.name,
+          join: res.data.data.created,
+          feed: res.data.data.feeds,
+          pets: res.data.data.pets,
+          comment: res.data.data.comments,
+          profileImg: res.data.data.profile,
+          userId: res.data.data.id,
+        });
+        console.log("업데이트 정보 ! ", userInfo);
+      })
+      .catch((error: any) => {
+        console.error("유저 정보 실패 : ", error);
+      });
+  };
+
   const logout = () => {
-    // userStore 초기화 시키기
-    userLogout;
+    userLogout();
     navigate("/login", { replace: true });
     window.location.reload();
   };

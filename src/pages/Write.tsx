@@ -154,10 +154,10 @@ export default function Write() {
             </button>
           </li>
           <li>
-            <li>
+            <div>
               <p className="bg-yellow-200">지도</p>
               <img src="" alt="" />
-            </li>
+            </div>
             <input
               type="text"
               className="w-full placeholder:text-center py-4 text-center"

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
-interface UserStore {
+export interface UserStore {
+  userId: any;
   isLogin: boolean;
   isFirst: boolean;
   userKey: string;
@@ -11,10 +12,10 @@ interface UserStore {
     id: number;
     name: string;
     gender: string;
-    age: string;
-    kind: string;
+    birth: string;
+    breed: string;
   }[];
-  write: number;
+  feed: number;
   comment: number;
   join: string;
 }
@@ -27,6 +28,7 @@ interface UserStoreActions {
 
 // 초기 상태 정의
 const initialUserState: UserStore = {
+  userId: "",
   isLogin: false,
   isFirst: true,
   userKey: "",
@@ -34,7 +36,7 @@ const initialUserState: UserStore = {
   name: "",
   email: "",
   pets: [],
-  write: 0,
+  feed: 0,
   comment: 0,
   join: "",
 };
@@ -51,7 +53,6 @@ export const useUserStore = create<UserStore & UserStoreActions>((set) => ({
         isFirst,
         userKey,
       };
-      console.log(updatedUserData);
       return updatedUserData;
     }),
 
@@ -63,6 +64,8 @@ export const useUserStore = create<UserStore & UserStoreActions>((set) => ({
 
   // 로그아웃 기능
   userLogout: () => {
+    console.log("로그아웃!");
     set(initialUserState); // 초기 상태로 설정하여 모든 값 지우기
+    console.log("유저 정보 삭제 확인 : ", initialUserState);
   },
 }));
