@@ -1,6 +1,7 @@
 import WeatherBar from "../components/weather/WeatherBar";
 import SearchBar from "../components/SearchBar";
 import { useGetData } from "../hooks/useGetData";
+import Map from "../components/Map";
 
 export default function Home() {
   // 데이터 전송 테스트
@@ -29,6 +30,7 @@ export default function Home() {
       <section className="relative w-3/4 justify-center flex-col items-center l:w-full">
         <WeatherBar />
         <SearchBar />
+        <Map />
         <div className="flex-grow h-96 bg-white">
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
