@@ -20,9 +20,6 @@ export default function MyPage() {
     return age;
   };
 
-  console.log(email, userId, name);
-  console.log(pets);
-
   return (
     <section className="w-full flex justify-center">
       <div className="flex justify-center w-3/4 bg-white l:w-full">
@@ -35,7 +32,7 @@ export default function MyPage() {
                 alt="profile"
               />
               <h1 className="p-3 bg-blue-400 dark:bg-slate-600 rounded-2xl  text-white mt-10 w-72 mb-10 text-center text-xl font-bold">
-                {email}의 마이페이지
+                {name}의 마이페이지
               </h1>
             </div>
           </div>

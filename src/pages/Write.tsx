@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { useUserStore } from "../store/User";
+import Map from "../components/Map";
 
 interface Feed {
   key: string;
+  writer: string;
   title: string;
   img: string;
   address: string;
@@ -11,20 +13,24 @@ interface Feed {
   time: string;
   content: string;
   likes: number;
+  comments: number;
 }
 
 export default function Write() {
   const key = useUserStore((state) => state.userKey);
+  const userName = useUserStore((state) => state.name);
 
   const [write, setWrite] = useState<Feed>({
     key: "",
     title: "",
+    writer: "",
     img: "",
     address: "",
     date: "",
     time: "",
     content: "",
     likes: 0,
+    comments: 0,
   });
 
   // 현재 시간 구하기
@@ -62,6 +68,7 @@ export default function Write() {
       setWrite((prevWrite) => ({
         ...prevWrite,
         key: key,
+        writer: userName,
         date: currentDate,
         [e.target.name]: e.target.value,
       }));
@@ -152,6 +159,7 @@ export default function Write() {
             >
               주소 찾기
             </button>
+            {write.address.length > 5 && <Map addStr={write.address} />}
           </li>
           <li>
             <div>
