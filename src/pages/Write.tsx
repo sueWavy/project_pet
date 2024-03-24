@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useUserStore } from "../store/User";
 import Map from "../components/Map";
+import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
 
 interface Feed {
   key: string;
@@ -144,27 +145,40 @@ export default function Write() {
               onChange={handleChange}
             />
           </li>
-          <li className="bg-white py-2 rounded-md">
+          <li className="bg-sky-400 dark:text-black hover:bg-sky-500 text-white dark:bg-yellow-200 py-2 rounded-md cursor-pointer dark:hover:bg-yellow-300">
+            <label
+              htmlFor="fileInput"
+              className="cursor-pointer flex justify-center items-center"
+            >
+              <FaImage className="mr-1" />
+              이미지 업로드
+            </label>
             <input
+              className="w-full h-full bg-white"
               type="file"
               accept="image/*"
               name="img"
+              id="fileInput"
+              style={{ display: "none" }}
               onChange={handleChange}
             />
           </li>
           <li>
             <button
-              className="bg-white w-full py-2 rounded-md"
+              className="w-full bg-sky-400 dark:text-black hover:bg-sky-500 text-white dark:bg-yellow-200 py-2 rounded-md cursor-pointer dark:hover:bg-yellow-300"
               onClick={onClickAddr}
             >
-              주소 찾기
+              <p className="flex justify-center items-center">
+                <FaMapMarkerAlt className="pt-1 mr-1" /> 주소 검색
+              </p>
             </button>
-            {write.address.length > 5 && <Map addStr={write.address} />}
           </li>
           <li>
             <div>
-              <p className="bg-yellow-200">지도</p>
-              <img src="" alt="" />
+              <p className="bg-sky-300 text-white dark:text-black dark:bg-yellow-100 p-1">
+                지도
+              </p>
+              {write.address.length > 5 && <Map addStr={write.address} />}
             </div>
             <input
               type="text"

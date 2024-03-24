@@ -36,7 +36,7 @@ function Map({ addStr }: MapProps) {
 
         let infowindow = new kakao.maps.InfoWindow({
           content:
-            '<div style="width:150px;text-align:center;padding:6px 0;">여기서 만나요🐶</div>',
+            '<div style="width:150px;text-align:center;padding:6px 0;">여기서 만나요!</div>',
         });
         infowindow.open(map, marker);
         map.setCenter(coords);

@@ -20,7 +20,7 @@ export default function Header() {
   const handleWrite = () => {
     if (!isLogin) {
       alert("로그인 후 이용가능한 기능입니다");
-      navigate("/");
+      navigate("/login");
     } else {
       navigate("/write");
     }
@@ -29,7 +29,7 @@ export default function Header() {
   const handleMyPage = () => {
     if (!isLogin) {
       alert("로그인 후 이용가능한 기능입니다");
-      navigate("/");
+      navigate("/login");
     } else {
       navigate(`mypage/:${userData.userId}`);
     }
