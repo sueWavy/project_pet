@@ -1,4 +1,5 @@
 import { useUserStore } from "../store/User";
+import noProfile from "../assets/noProfile.jpg";
 
 export default function MyPage() {
   // const userData = useUserStore((state) => state);
@@ -28,7 +29,7 @@ export default function MyPage() {
             <div>
               <img
                 className="rounded-full w-72 h-72 object-cover ring-4 ring-offset-4 ring-sky-300 dark:ring-yellow-400"
-                src={profileImg}
+                src={profileImg.length < 3 ? noProfile : profileImg}
                 alt="profile"
               />
               <h1 className="p-3 bg-blue-400 dark:bg-slate-600 rounded-2xl  text-white mt-10 w-72 mb-10 text-center text-xl font-bold">
