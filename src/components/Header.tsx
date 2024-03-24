@@ -12,6 +12,7 @@ export default function Header() {
   const isLogin = useUserStore((state) => state.isLogin);
   const isFirst = useUserStore((state) => state.isFirst);
   const userData = useUserStore((state) => state);
+  const userProfile = useUserStore((state) => state.profileImg);
 
   console.log("유저 데이터 확인 : ", userData);
 
@@ -59,7 +60,8 @@ export default function Header() {
             <Link to="/login">로그인</Link>
           </li>
         ) : (
-          <li className={hoverStyle} onClick={logout}>
+          <li className={`${hoverStyle} flex items-center`} onClick={logout}>
+            <img src={userProfile} className="w-6 h-6 rounded-full mr-2" />
             로그아웃
           </li>
         )}
