@@ -3,9 +3,11 @@ import { useUserStore } from "../store/User";
 import axios from "axios";
 
 interface Data {
-  status: string;
+  status: boolean;
   message: string;
-  result: any;
+  result: {
+    list: Array<any>;
+  };
 }
 
 const fetchData = async (token: string) => {
@@ -25,7 +27,7 @@ const fetchData = async (token: string) => {
 
 export const useGetData = () => {
   const token = useUserStore((state) => state.userKey);
-  return useQuery<Data, Error, Data, readonly unknown[]>({
+  return useQuery<Data, Error, Data["result"], readonly unknown[]>({
     queryKey: ["data"],
     queryFn: () => fetchData(token),
   });
