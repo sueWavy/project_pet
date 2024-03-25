@@ -4,6 +4,9 @@ import Map from "./Map";
 export default function Feed({ data }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const { comments } = data;
+  console.log(comments);
+
   return (
     <ul
       key={data.id}
@@ -18,13 +21,17 @@ export default function Feed({ data }: any) {
           <p>{data.writer}</p>
         </div>
 
-        <span>작성일 : {data.date.slice(0, 25)}</span>
+        <span>작성일 : {data.date.slice(0, 24)}</span>
       </li>
       <li className="border p-3">
         <h2>{data.title}</h2>
+        <div className="flex justify-between">
+          <p>좋아요 : {data.likes}</p>
+          <p>댓글수 : {data.comments.length}</p>
+        </div>
       </li>
       <li className="flex justify-center">
-        <img src={data.feedImg} className="w-full h-full object-cover" />
+        <img src={data.feedImg} className="w-96  object-cover" />
       </li>
       <li className="bg-red-400 text-white">
         <button
@@ -43,8 +50,18 @@ export default function Feed({ data }: any) {
         <p>모이는 시간 : </p>
         <p>{data.time}</p>
       </li>
-      <li className="p-3 text-start">
+      <li className="p-3 text-start min-h-32">
         <p>{data.content}</p>
+      </li>
+      <li>
+        <h2 className="bg-sky-200">댓글창</h2>
+        {comments.map((it: any) => (
+          <div key={it.id}>
+            <span>
+              {it.writer} : {it.comment}
+            </span>
+          </div>
+        ))}
       </li>
     </ul>
   );

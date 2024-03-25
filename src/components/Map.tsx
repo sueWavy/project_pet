@@ -34,11 +34,8 @@ function Map({ addStr }: MapProps) {
           position: coords,
         });
 
-        let infowindow = new kakao.maps.InfoWindow({
-          content:
-            '<div style="width:150px;text-align:center;padding:6px 0;">여기서 만나요!</div>',
-        });
-        infowindow.open(map, marker);
+        let infowindow = new kakao.maps.InfoWindow({});
+        infowindow.open(map);
         map.setCenter(coords);
       }
     });

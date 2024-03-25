@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useUserStore } from "../store/User";
 import Map from "../components/Map";
 import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 interface Feed {
   key: string;
@@ -10,28 +11,27 @@ interface Feed {
   title: string;
   img: string;
   address: string;
-  date: string;
   time: string;
   content: string;
-  likes: number;
-  comments: number;
+  // likes: number;
+  // comments: number;
 }
 
 export default function Write() {
   const key = useUserStore((state) => state.userKey);
   const userName = useUserStore((state) => state.name);
+  const navigate = useNavigate();
 
   const [write, setWrite] = useState<Feed>({
-    key: "",
+    key: key,
     title: "",
     writer: "",
     img: "",
     address: "",
-    date: "",
     time: "",
     content: "",
-    likes: 0,
-    comments: 0,
+    // likes: 0,
+    // comments: 0,
   });
 
   // 현재 시간 구하기
@@ -70,7 +70,6 @@ export default function Write() {
         ...prevWrite,
         key: key,
         writer: userName,
-        date: currentDate,
         [e.target.name]: e.target.value,
       }));
       console.log(write);
@@ -94,20 +93,24 @@ export default function Write() {
   };
 
   const AddFeed = (petInfo: Feed) => {
+    console.log(write);
+
     axios
       .post(
         "http://43.201.39.118/api/feed",
         {
           mode: "write",
-          list: write,
+          data: write,
         },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            Authorization: "bearer " + key,
           },
         }
       )
-      .then((res) => console.log("펫 정보 등록", res.data));
+      .then((res) => console.log("게시글 작성", res.data));
+    console.log("데이터 확인", write);
+    // navigate("/");
   };
 
   // 다크 모드 확인
@@ -211,7 +214,10 @@ export default function Write() {
             />
           </li>
           <li>
-            <button className="font-['YEONGJUPunggiGinsengTTF'] bg-blue-400 dark:bg-slate-500 text-white text-xl w-full h-16 rounded-bl-xl rounded-br-xl hover:bg-blue-500 dark:hover:bg-slate-700">
+            <button
+              className="font-['YEONGJUPunggiGinsengTTF'] bg-blue-400 dark:bg-slate-500 text-white text-xl w-full h-16 rounded-bl-xl rounded-br-xl hover:bg-blue-500 dark:hover:bg-slate-700"
+              onClick={() => AddFeed(write)}
+            >
               작성하기
             </button>
           </li>
