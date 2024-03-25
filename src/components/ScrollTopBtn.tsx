@@ -22,7 +22,7 @@ export default function ScrollTopBtn() {
 
   const scrollToTop = () => {
     window.scrollTo({
-      top: 40,
+      top: 0,
       behavior: "smooth",
     });
   };

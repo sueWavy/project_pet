@@ -29,8 +29,6 @@ export default function Feed({ data }: any) {
     formattedTime = `오후 ${hours - 12}시 ${minutes}분`;
   }
 
-  console.log("데이터 넘긴거 확인 : ", data);
-
   return (
     <ul
       key={data.id}
