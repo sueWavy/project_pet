@@ -23,7 +23,7 @@ export default function MyPage() {
 
   return (
     <section className="w-full flex justify-center">
-      <div className="flex justify-center w-3/4 bg-white l:w-full">
+      <div className="flex justify-center w-3/4 dark:bg-slate-900 bg-white l:w-full">
         <div className="flex-col justify-center items-center py-10 w-full">
           <div className="flex justify-center">
             <div>
@@ -33,7 +33,7 @@ export default function MyPage() {
                 alt="profile"
               />
               <div className="flex-col justify-center items-center text-center">
-                <button className="mt-7 bg-sky-300 px-5 py-1 rounded-full text-white hover:bg-sky-500 hover:text-white dark:bg-yellow-300 dark:hover:bg-yellow-400">
+                <button className="mt-7 bg-sky-300 px-5 py-1 rounded-full text-white hover:bg-sky-500 hover:text-white dark:text-black dark:bg-yellow-400 dark:hover:bg-yellow-200">
                   프로필 사진 업로드
                 </button>
                 <h1 className="p-3 bg-blue-400 dark:bg-slate-600 rounded-2xl  text-white mt-10 w-72 mb-10 text-center text-xl font-bold">

@@ -25,7 +25,7 @@ export default function Home() {
       <section className="relative w-3/4 justify-center flex-col items-center l:w-full">
         <WeatherBar />
         <SearchBar />
-        <div className="flex-col justify-center items-center text-center bg-white w-full p-5">
+        <div className="flex-col justify-center items-center text-center bg-white w-full dark:bg-gray-700 p-5">
           {data &&
             data.list.map((it) => (
               <div key={it.id} className="flex justify-center">
