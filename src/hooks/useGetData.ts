@@ -1,4 +1,5 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { useUserStore } from "../store/User";
 import axios from "axios";
 
 interface Data {
@@ -7,27 +8,25 @@ interface Data {
   result: any;
 }
 
-const fetchData = async (): Promise<Data> => {
-  const form = new FormData();
-  form.append("mode", "test");
-
-  const response = await axios.post<Data>(
-    "http://43.201.39.118/api/main.php",
-    form,
+const fetchData = async (token: string) => {
+  const res = await axios.post(
+    "http://43.201.39.118/api/feed",
+    {
+      mode: "list",
+    },
     {
       headers: {
-        "Content-Type": "multipart/form-data",
+        Authorization: "bearer " + token,
       },
     }
   );
-
-  return response.data;
-  console.log(response);
+  return res.data;
 };
 
 export const useGetData = () => {
+  const token = useUserStore((state) => state.userKey);
   return useQuery<Data, Error, Data, readonly unknown[]>({
     queryKey: ["data"],
-    queryFn: fetchData,
+    queryFn: () => fetchData(token),
   });
 };

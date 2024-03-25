@@ -4,40 +4,37 @@ import Feed from "../components/Feed";
 import { useEffect } from "react";
 import { useUserStore } from "../store/User";
 import axios from "axios";
+import { useGetData } from "../hooks/useGetData";
 
 export default function Home() {
-  const currentDate = new Date();
   const token = useUserStore((state) => state.userKey);
+  const { data, isLoading, isError } = useGetData();
 
-  const options: Intl.DateTimeFormatOptions = {
-    timeZone: "Asia/Seoul",
-    weekday: "long", // Specify the format for weekday
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const koreanDate: string = currentDate.toLocaleString("ko-KR", options);
+  if (isError) {
+    return <div>Error fetching data</div>;
+  }
 
-  // post, api/feed로 변경 ( cors )
-  useEffect(() => {
-    axios
-      .post(
-        "http://43.201.39.118/api/feed",
-        {
-          mode: "list",
-        },
-        {
-          headers: {
-            Authorization: "bearer " + token,
-          },
-        }
-      )
-      .then((res) => console.log("피드 받아오기", res));
-  }, []);
+  console.log("query 확인 : ", data);
+
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       "http://43.201.39.118/api/feed",
+  //       {
+  //         mode: "list",
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: "bearer " + token,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => console.log("피드 받아오기", res));
+  // }, []);
 
   return (
     <div className="w-full h-full flex justify-center items-center ">
