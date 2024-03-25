@@ -13,8 +13,6 @@ interface Feed {
   address: string;
   time: string;
   content: string;
-  // likes: number;
-  // comments: number;
 }
 
 export default function Write() {
@@ -30,8 +28,6 @@ export default function Write() {
     address: "",
     time: "",
     content: "",
-    // likes: 0,
-    // comments: 0,
   });
 
   // 현재 시간 구하기
@@ -110,7 +106,8 @@ export default function Write() {
       )
       .then((res) => console.log("게시글 작성", res.data));
     console.log("데이터 확인", write);
-    // navigate("/");
+    alert("게시글을 작성했습니다");
+    navigate("/");
   };
 
   // 다크 모드 확인
@@ -165,6 +162,7 @@ export default function Write() {
               style={{ display: "none" }}
               onChange={handleChange}
             />
+            {write.img.length > 10 && <p>이미지가 업로드 되었습니다 🐶</p>}
           </li>
           <li>
             <button

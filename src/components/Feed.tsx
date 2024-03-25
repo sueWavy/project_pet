@@ -11,6 +11,7 @@ import Map from "./Map";
 
 export default function Feed({ data }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isMy, setIsMy] = useState<boolean>(false);
 
   const timeParts = data.time.split(":");
   const hours = parseInt(timeParts[0], 10);
@@ -82,14 +83,21 @@ export default function Feed({ data }: any) {
       <li className="flex justify-center">
         <img src={data.image} className="w-3/4 rounded-3xl p-3  object-cover" />
       </li>
-      <li className="p-2 text-blue-500 dark:text-white">
-        <button
-          className="bg-sky-200 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          모임 장소 확인하기
-        </button>
-
+      <li className="p-2 text-white ">
+        <div className="flex justify-center space-x-5">
+          <button
+            className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            모임 장소
+          </button>
+          <button className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white ">
+            글보기
+          </button>
+          <button className=" bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white ">
+            ♥
+          </button>
+        </div>
         {isOpen && <Map addStr={data.address} />}
       </li>
 

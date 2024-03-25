@@ -42,7 +42,11 @@ function Map({ addStr }: MapProps) {
   }, [addStr]);
 
   return (
-    <div id="map" style={{ width: "100%", height: "400px" }} ref={mapRef}></div>
+    <div
+      id="map"
+      style={{ width: "100%", height: "400px", marginTop: "10px" }}
+      ref={mapRef}
+    ></div>
   );
 }
 

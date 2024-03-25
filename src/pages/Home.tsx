@@ -2,9 +2,21 @@ import WeatherBar from "../components/weather/WeatherBar";
 import SearchBar from "../components/SearchBar";
 import Feed from "../components/Feed";
 import { useGetData } from "../hooks/useGetData";
+import { useEffect } from "react";
 
 export default function Home() {
   const { data, isLoading, isError } = useGetData();
+
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scrollTop();
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
