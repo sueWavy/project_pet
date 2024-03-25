@@ -22,6 +22,7 @@ export default function Home() {
 
   const koreanDate: string = currentDate.toLocaleString("ko-KR", options);
 
+  // post, api/feed로 변경 ( cors )
   useEffect(() => {
     axios
       .post(
