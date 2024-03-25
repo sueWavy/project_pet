@@ -92,7 +92,7 @@ export default function Feed({ data }: any) {
             모임 장소
           </button>
           <button className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white ">
-            글보기
+            댓글보기
           </button>
           <button className=" bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white ">
             ♥
@@ -102,12 +102,12 @@ export default function Feed({ data }: any) {
       </li>
 
       <li className="flex justify-center space-x-3 p-3 bg-sky-100 dark:bg-yellow-100 s:text-sm">
-        <div className="flex">
+        <div className="flex sm:flex-col sm:text-center sm:justify-center sm:items-center">
           <p className="flex items-center mr-2">
             <RiMapPinFill className="mr-2" />
-            모이는 장소 -
+            모이는 장소 <span className="ml-2 sm:hidden">-</span>
           </p>
-          <p>{data.address}</p>
+          <p className="sm:border-t border-slate-400 sm:mt-1">{data.address}</p>
         </div>
       </li>
       <li className="flex justify-center p-2 bg-gray-200 dark:bg-yellow-200">

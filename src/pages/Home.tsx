@@ -3,13 +3,14 @@ import SearchBar from "../components/SearchBar";
 import Feed from "../components/Feed";
 import { useGetData } from "../hooks/useGetData";
 import { useEffect } from "react";
+import ScrollTopBtn from "../components/ScrollTopBtn";
 
 export default function Home() {
   const { data, isLoading, isError } = useGetData();
 
   const scrollTop = () => {
     window.scrollTo({
-      top: 0,
+      top: 50,
       behavior: "smooth",
     });
   };
@@ -35,6 +36,7 @@ export default function Home() {
   return (
     <div className="w-full h-full flex justify-center items-center ">
       <section className="relative w-3/4 justify-center flex-col items-center l:w-full">
+        <ScrollTopBtn />
         <WeatherBar />
         <SearchBar />
         <div className="flex-col justify-center items-center text-center bg-white w-full dark:bg-gray-700 p-5">
