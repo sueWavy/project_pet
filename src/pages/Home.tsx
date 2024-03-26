@@ -24,6 +24,8 @@ export default function Home() {
     }
   }, [data]);
 
+  console.log(data?.list);
+
   const scrollTop = () => {
     window.scrollTo({
       top: 50,

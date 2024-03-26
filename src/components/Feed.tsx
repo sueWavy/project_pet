@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
 import { GiSittingDog } from "react-icons/gi";
-import { MdOutlineDateRange } from "react-icons/md";
-import { RiMapPinFill } from "react-icons/ri";
+import { MdOutlineDateRange, MdEdit } from "react-icons/md";
+import { RiMapPinFill, RiDeleteBinFill } from "react-icons/ri";
 import { IoIosTimer } from "react-icons/io";
+
 import noProfile from "../assets/noProfile.jpg";
 
 import Map from "./Map";
+import useLikes from "../hooks/useLikes";
+import useFeedDel from "../hooks/useFeedDel";
 
 export default function Feed({ data }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isMy, setIsMy] = useState<boolean>(false);
+  const { clickLikes } = useLikes();
+  const { deleteFeed } = useFeedDel();
 
   const timeParts = data.time.split(":");
   const hours = parseInt(timeParts[0], 10);
@@ -32,7 +36,7 @@ export default function Feed({ data }: any) {
   return (
     <ul
       key={data.id}
-      className="font-['Orbit-Regular'] w-3/4 mb-10 border dark:border-none bg-slate-100 flex-col justify-center items-center text-center rounded-2xl shadow-2xl overflow-hidden"
+      className="font-['Orbit-Regular'] w-3/4 s:w-full mb-10 border dark:border-none bg-slate-100 flex-col justify-center items-center text-center rounded-2xl shadow-2xl overflow-hidden"
     >
       <li className="flex items-center justify-between py-2 px-6 bg-sky-200 dark:bg-black">
         <div className="flex items-center space-x-2">
@@ -60,7 +64,7 @@ export default function Feed({ data }: any) {
             </p>
             <p className="flex items-center">
               <AiOutlineMessage className="mr-2" />
-              {data.comments}
+              {data.comments.length}
             </p>
           </div>
         </div>
@@ -81,8 +85,20 @@ export default function Feed({ data }: any) {
       <li className="flex justify-center">
         <img src={data.image} className="w-3/4 rounded-3xl p-3  object-cover" />
       </li>
+      <li className="p-3">
+        <pre>{data.content}</pre>
+      </li>
       <li className="p-2 text-white ">
         <div className="flex justify-center space-x-5">
+          <button
+            onClick={() => clickLikes(data.id)}
+            className={`${data.like ? "text-red-400" : "text-white"} ${
+              data.like ? "dark:text-yellow-400" : "text-white"
+            }  bg-sky-300 border dark:border-none dark:hover:bg-gray-600 
+             dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white`}
+          >
+            ♥
+          </button>
           <button
             className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
             onClick={() => setIsOpen(!isOpen)}
@@ -92,9 +108,19 @@ export default function Feed({ data }: any) {
           <button className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white ">
             댓글보기
           </button>
-          <button className=" bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white ">
-            ♥
-          </button>
+          {data.revise && (
+            <button className=" bg-orange-300 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-orange-400 hover:text-white ">
+              <MdEdit />
+            </button>
+          )}
+          {data.revise && (
+            <button
+              onClick={() => deleteFeed(data.id)}
+              className=" bg-red-300 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-red-400 hover:text-white "
+            >
+              <RiDeleteBinFill />
+            </button>
+          )}
         </div>
         {isOpen && <Map addStr={data.address} />}
       </li>
