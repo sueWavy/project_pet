@@ -49,6 +49,7 @@ const router = createBrowserRouter([
       { path: "/mypage/:id", element: <MyPage /> },
       { path: "/view/:id", element: <View /> },
       { path: "/write", element: <Write /> },
+      { path: "/write/:id", element: <Write /> },
     ],
   },
 ]);

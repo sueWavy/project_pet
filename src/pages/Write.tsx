@@ -5,7 +5,7 @@ import Map from "../components/Map";
 import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-interface Feed {
+export interface Feed {
   key: string;
   writer: string;
   title: string;
@@ -88,7 +88,7 @@ export default function Write() {
     });
   };
 
-  const AddFeed = (petInfo: Feed) => {
+  const AddFeed = (write: Feed) => {
     console.log(write);
 
     axios
@@ -104,7 +104,7 @@ export default function Write() {
           },
         }
       )
-      .then((res) => console.log("게시글 작성", res.data));
+      .then((res) => console.log("게시글 작성", res, res.data));
     console.log("데이터 확인", write);
     alert("게시글을 작성했습니다");
     navigate("/");
@@ -162,8 +162,14 @@ export default function Write() {
               style={{ display: "none" }}
               onChange={handleChange}
             />
-            {write.img.length > 10 && <p>이미지가 업로드 되었습니다 🐶</p>}
+            {write.img.length > 1 && <p>이미지가 업로드 되었습니다 🐶</p>}
           </li>
+
+          {write.img.length > 1 && (
+            <li>
+              <img className="w-full rounded-2xl" src={write.img} />
+            </li>
+          )}
           <li>
             <button
               className="w-full bg-sky-400 dark:text-black hover:bg-sky-500 text-white dark:bg-yellow-200 py-2 rounded-md cursor-pointer dark:hover:bg-yellow-300"
