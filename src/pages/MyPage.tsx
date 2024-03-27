@@ -1,13 +1,11 @@
 import { useUserStore } from "../store/User";
+import { useEffect } from "react";
 import noProfile from "../assets/noProfile.jpg";
 import useLogin from "../hooks/useLogin";
-import { useEffect } from "react";
 
 export default function MyPage() {
   const userData = useUserStore((state) => state);
   const { updateUser } = useLogin();
-
-  console.log(userData);
 
   // 유저 정보 업데이트하기
   useEffect(() => {
@@ -17,6 +15,7 @@ export default function MyPage() {
   const { email, userId, name, profileImg, feed, comment, join, pets } =
     useUserStore();
 
+  /** 생년월일 나이로 바꾸기 */
   const birthToAge = (birthDateString: string) => {
     const birthDate = new Date(birthDateString);
     const today = new Date();
@@ -32,8 +31,10 @@ export default function MyPage() {
     return age;
   };
 
+  // 활동량(작성글+작성댓글)
   const activity = feed + comment;
 
+  // 활동량에 따라 등급 나누기
   const acticityLevel = () => {
     if (activity < 9) {
       return "활동량이 낮아요 🥲";
@@ -48,6 +49,14 @@ export default function MyPage() {
     }
     return;
   };
+
+  // 중복 스타일
+  const infoBox =
+    "h-14 flex justify-center items-center text-white text-xl font-bold";
+  const infoUl =
+    "bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5";
+  const infoBtn =
+    "bg-green-200 px-5 py-1 rounded-full text-slate-600 hover:bg-green-500 hover:text-white";
 
   return (
     <section className="w-full flex justify-center">
@@ -72,11 +81,11 @@ export default function MyPage() {
           </div>
           <div className="flex justify-center items-center">
             <div className="grid grid-cols-3 gap-7 ml:grid-cols-2 sm:flex sm:flex-col">
-              <ul className="bg-white dark:bg-gray-700 dark:text-white rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
-                <h3 className="bg-green-400 h-14 flex justify-center items-center text-white text-xl font-bold">
+              <ul className={`${infoUl}`}>
+                <h3 className={`${infoBox} bg-green-400`}>
                   함께 하고 있는 반려견
                 </h3>
-                <button className="bg-green-200 px-5 py-1 rounded-full text-slate-600 hover:bg-green-500 hover:text-white">
+                <button className={`${infoBtn} bg-green-200`}>
                   반려견 추가하기
                 </button>
                 {pets.map((it) => (
@@ -94,21 +103,17 @@ export default function MyPage() {
                   </li>
                 ))}
               </ul>
-              <ul className="bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
-                <h3 className="bg-yellow-400 h-14 flex justify-center items-center text-white text-xl font-bold">
-                  내 회원정보
-                </h3>
-                <button className="bg-yellow-200 px-5 py-1 rounded-full text-slate-600 hover:bg-yellow-400 hover:text-white">
+              <ul className={`${infoUl}`}>
+                <h3 className={`${infoBox} bg-yellow-400`}>내 회원정보</h3>
+                <button className={`${infoBtn} bg-yellow-200`}>
                   이름 수정하기
                 </button>
                 <li>이름 : {name}</li>
                 <li>이메일 : {email}</li>
                 <li>가입일자 : {join.slice(0, 10)}</li>
               </ul>
-              <ul className="bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
-                <h3 className="bg-orange-400 h-14 flex justify-center items-center text-white text-xl font-bold">
-                  내 활동내역
-                </h3>
+              <ul className={`${infoUl}`}>
+                <h3 className={`${infoBox} bg-orange-400`}>내 활동내역</h3>
                 <li>작성 게시글 : {feed}</li>
                 <li>작성 댓글 : {comment}</li>
                 <li>

@@ -1,6 +1,6 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store/User";
-import axios from "axios";
 
 const useLogin = () => {
   const navigate = useNavigate();

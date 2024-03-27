@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+// 스토어 타입 지정
 export interface UserStore {
   userId: any;
   isLogin: boolean;
@@ -20,13 +21,14 @@ export interface UserStore {
   join: string;
 }
 
+// 스토어 액션 타입 지정
 interface UserStoreActions {
   updateUser: (userData: Partial<UserStore>) => void;
   updateFirst: (isFirst: boolean, userKey: string) => void;
   userLogout: () => void;
 }
 
-// 초기 상태 정의
+// 스토어 초기 상태 정의
 const initialUserState: UserStore = {
   userId: "",
   isLogin: false,
@@ -56,13 +58,14 @@ export const useUserStore = create<UserStore & UserStoreActions>((set) => ({
       return updatedUserData;
     }),
 
+  /** 유저 데이터 업데이트 기능 */
   updateUser: (userData) =>
     set((state) => ({
       ...state,
       ...userData,
     })),
 
-  // 로그아웃 기능
+  /** 로그아웃 기능 */
   userLogout: () => {
     console.log("로그아웃!");
     set(initialUserState); // 초기 상태로 설정하여 모든 값 지우기

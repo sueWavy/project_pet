@@ -1,6 +1,6 @@
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useUserStore } from "../store/User";
-import axios from "axios";
 
 interface Data {
   status: boolean;

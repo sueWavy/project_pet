@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdPets } from "react-icons/md";
 
 export default function ScrollTopBtn() {

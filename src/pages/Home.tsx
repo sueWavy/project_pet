@@ -1,17 +1,17 @@
 import { useGetData } from "../hooks/useGetData";
 import { useEffect, useMemo, useState } from "react";
+import { useUserStore } from "../store/User";
 import CustomPagination from "../components/CustomPagination";
 import WeatherBar from "../components/weather/WeatherBar";
 import SearchBar from "../components/SearchBar";
-import Feed from "../components/Feed";
 import ScrollTopBtn from "../components/ScrollTopBtn";
-import { useUserStore } from "../store/User";
-
 import noFeed from "../assets/noFeed.mp4";
+import Feed from "../components/Feed";
 
 export default function Home() {
-  const key = useUserStore((state) => state.userKey);
   const { data, isLoading, isError } = useGetData();
+  const key = useUserStore((state) => state.userKey);
+
   const [isLikes, setIsLikes] = useState<boolean>(false);
   const [sortOption, setSortOption] = useState<string>("lastest");
   const [searchTxt, setSearchTxt] = useState<string>("");

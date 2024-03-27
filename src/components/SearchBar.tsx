@@ -3,6 +3,7 @@ import React from "react";
 interface SearchBarProps {
   isLikes: boolean;
 
+  // 함수, 함수 이벤트 타입 지정
   handleLikes: () => void;
   handleSortChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;

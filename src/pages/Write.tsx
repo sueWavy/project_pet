@@ -1,11 +1,10 @@
-import axios from "axios";
+import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
 import { useState } from "react";
 import { useUserStore } from "../store/User";
 import Map from "../components/Map";
-import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import useWrite from "../hooks/useWrite";
 
+// 피드 타입 지정
 export interface Feeds {
   key: string;
   writer: string;
@@ -19,7 +18,6 @@ export interface Feeds {
 export default function Write() {
   const key = useUserStore((state) => state.userKey);
   const userName = useUserStore((state) => state.name);
-  const navigate = useNavigate();
 
   const [write, setWrite] = useState<Feeds>({
     key: key,
@@ -97,6 +95,10 @@ export default function Write() {
     }
   };
 
+  // 중복 스타일
+  const inputBtn =
+    "bg-sky-400 dark:text-black hover:bg-sky-500 text-white dark:bg-yellow-200 py-2 rounded-md cursor-pointer dark:hover:bg-yellow-300";
+
   return (
     <section className="w-full flex justify-center">
       <form
@@ -120,7 +122,7 @@ export default function Write() {
               onChange={handleChange}
             />
           </li>
-          <li className="bg-sky-400 dark:text-black hover:bg-sky-500 text-white dark:bg-yellow-200 py-2 rounded-md cursor-pointer dark:hover:bg-yellow-300">
+          <li className={`${inputBtn}`}>
             <label
               htmlFor="fileInput"
               className="cursor-pointer flex justify-center items-center"
@@ -145,11 +147,8 @@ export default function Write() {
               <img className="w-full rounded-2xl" src={write.img} />
             </li>
           )}
-          <li>
-            <button
-              className="w-full bg-sky-400 dark:text-black hover:bg-sky-500 text-white dark:bg-yellow-200 py-2 rounded-md cursor-pointer dark:hover:bg-yellow-300"
-              onClick={onClickAddr}
-            >
+          <li className={`${inputBtn}`}>
+            <button className="" onClick={onClickAddr}>
               <p className="flex justify-center items-center">
                 <FaMapMarkerAlt className="pt-1 mr-1" /> 주소 검색
               </p>

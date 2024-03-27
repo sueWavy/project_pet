@@ -1,23 +1,24 @@
-import ThemeButton from "./ThemeBtn";
-import { MdPets } from "react-icons/md";
+import { useUserStore } from "../store/User";
 import { Link, useNavigate } from "react-router-dom";
+import { MdPets } from "react-icons/md";
+import ThemeButton from "./ThemeBtn";
 import useLogin from "../hooks/useLogin";
 import AddInfo from "./AddInfo";
-import { useUserStore } from "../store/User";
 
+// 중복 스타일
 const hoverStyle = "cursor-pointer hover:text-2xl";
 
 export default function Header() {
   const { logout } = useLogin();
+
   const isLogin = useUserStore((state) => state.isLogin);
   const isFirst = useUserStore((state) => state.isFirst);
   const userData = useUserStore((state) => state);
   const userProfile = useUserStore((state) => state.profileImg);
 
-  // console.log("유저 데이터 확인 : ", userData);
-
   const navigate = useNavigate();
 
+  /** 글쓰기로 이동 기능 */
   const handleWrite = () => {
     if (!isLogin) {
       alert("로그인 후 이용가능한 기능입니다");
@@ -27,6 +28,7 @@ export default function Header() {
     }
   };
 
+  /** 마이페이지로 이동 기능 */
   const handleMyPage = () => {
     if (!isLogin) {
       alert("로그인 후 이용가능한 기능입니다");

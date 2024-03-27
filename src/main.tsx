@@ -11,7 +11,6 @@ import NotFound from "./pages/NotFound.tsx";
 import Login from "./pages/Login.tsx";
 import MyPage from "./pages/MyPage.tsx";
 import Write from "./pages/Write.tsx";
-import View from "./pages/View.tsx";
 import KakaO from "./pages/Kakao.tsx";
 import ProtectedRoute from "./pages/ProtectRoute.ts";
 
@@ -25,7 +24,6 @@ declare global {
 }
 
 const KAKAO_KEY: string | undefined = import.meta.env.VITE_REACT_APP_KAKAO_API;
-
 const GOOGLE_KEY: string | undefined = import.meta.env
   .VITE_REACT_APP_GOOGLE_API;
 
@@ -56,7 +54,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: "/view/:id", element: <View /> },
       {
         path: "/write",
         element: (
