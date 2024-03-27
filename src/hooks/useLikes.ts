@@ -9,7 +9,7 @@ const useLikes = () => {
   /** 좋아요 (즐겨찾기 기능) */
   const clickLikes = (feedId: number) => {
     if (!key) {
-      alert("로그인 후 이용가능합니다.");
+      alert("로그인 후 이용 가능합니다.");
       return;
     }
     axios

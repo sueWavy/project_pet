@@ -41,13 +41,7 @@ function Map({ addStr }: MapProps) {
     });
   }, [addStr]);
 
-  return (
-    <div
-      id="map"
-      style={{ width: "100%", height: "400px", marginTop: "10px" }}
-      ref={mapRef}
-    ></div>
-  );
+  return <div id="map" className="w-full h-96 mt-3" ref={mapRef}></div>;
 }
 
 export default Map;

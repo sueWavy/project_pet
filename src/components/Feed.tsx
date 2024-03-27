@@ -11,7 +11,7 @@ import noProfile from "../assets/noProfile.jpg";
 import Map from "./Map";
 import useLikes from "../hooks/useLikes";
 import useFeed from "../hooks/useFeed";
-import { Feed } from "../pages/Write";
+import { Feeds } from "../pages/Write";
 import { useUserStore } from "../store/User";
 import CommentBar from "./CommentBar";
 
@@ -19,8 +19,7 @@ export default function Feed({ data }: any) {
   const key = useUserStore((state) => state.userKey);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [editData, setEditData] = useState<Feed>({
+  const [editData, setEditData] = useState<Feeds>({
     key: key,
     title: data.title,
     writer: data.writer,
@@ -31,10 +30,14 @@ export default function Feed({ data }: any) {
   });
 
   const { clickLikes } = useLikes();
-  const { deleteFeed, editFeed } = useFeed();
+  const { deleteFeed, editFeed, isEdit, handleEdit } = useFeed();
 
-  const handleEdit = () => {
-    setIsEdit((prev) => !prev);
+  const handleOpen = () => {
+    if (!key) {
+      alert("로그인 후 이용 가능합니다");
+      return;
+    }
+    setIsOpen((prev) => !prev);
   };
 
   const handleChange = (
@@ -136,7 +139,7 @@ export default function Feed({ data }: any) {
           </p>
           <p className="flex items-center">
             <AiOutlineMessage className="mr-2" />
-            {data.comments}
+            {data.comment}
           </p>
         </div>
       </li>
@@ -145,7 +148,7 @@ export default function Feed({ data }: any) {
         <img src={data.image} className="w-3/4 rounded-3xl p-3  object-cover" />
       </li>
       <li className="p-3 relative min-h-24">
-        <pre>{data.content}</pre>
+        <p className="text-balance">{data.content}</p>
         {isEdit && (
           <textarea
             onChange={handleChange}
@@ -179,7 +182,7 @@ export default function Feed({ data }: any) {
 
           <button
             className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={handleOpen}
           >
             모임 장소
           </button>
@@ -217,9 +220,10 @@ export default function Feed({ data }: any) {
           <Map addStr={editData.address} />
         )}
       </li>
-      {/* 댓글창 */}
+
+      {/* 댓글창 <CommentBar/> */}
       <li>
-        <CommentBar comment={data.comments} feedId={data.id} />
+        <CommentBar comments={data.comments} feedId={data.id} />
       </li>
       <li className="flex justify-center space-x-3 p-3 bg-sky-100 dark:bg-yellow-100 s:text-sm">
         <div className="flex sm:flex-col sm:text-center sm:justify-center sm:items-center">

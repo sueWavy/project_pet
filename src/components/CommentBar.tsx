@@ -5,11 +5,18 @@ import useComment from "../hooks/useComment";
 export default function CommentBar({ comments, feedId }: any) {
   const userName = useUserStore((state) => state.name);
   const [comment, setComment] = useState<string>("");
-  const { addComment } = useComment();
+  const { addComment, DelComment } = useComment();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
-    console.log(comment);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (comment.trim() !== "") {
+      addComment(feedId, comment);
+      setComment("");
+    }
   };
 
   return (
@@ -19,28 +26,29 @@ export default function CommentBar({ comments, feedId }: any) {
         <ul>
           {comments.map((it: any) => (
             <li key={it.id} className="flex">
-              <span>...</span>
-              <span>...</span>
-              <button>삭제</button>
+              <span>{it.writer}</span>
+              <span>{it.comment}</span>
+              <button onClick={() => DelComment(it.id)}>삭제</button>
             </li>
           ))}
         </ul>
       )}
       <div className="flex justify-center">
-        <form className="flex w-4/5 justify-between rounded-xl bg-white">
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-4/5 justify-between rounded-xl bg-white"
+        >
           <span className="w-1/6 border-r-2 border-gray-400">{userName}</span>
           <input
             className="w-4/6 placeholder:text-center px-1"
             onChange={handleInput}
+            value={comment}
             name="comment"
             type="text"
             placeholder="댓글을 입력하세요"
           />
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              addComment(feedId, comment);
-            }}
+            type="submit"
             className="w-1/6 border-l-2 border-gray-400 bg-slate-200"
           >
             등록

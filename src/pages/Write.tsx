@@ -5,7 +5,7 @@ import Map from "../components/Map";
 import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-export interface Feed {
+export interface Feeds {
   key: string;
   writer: string;
   title: string;
@@ -20,7 +20,7 @@ export default function Write() {
   const userName = useUserStore((state) => state.name);
   const navigate = useNavigate();
 
-  const [write, setWrite] = useState<Feed>({
+  const [write, setWrite] = useState<Feeds>({
     key: key,
     title: "",
     writer: "",
@@ -88,7 +88,7 @@ export default function Write() {
     });
   };
 
-  const AddFeed = (write: Feed) => {
+  const AddFeed = (write: Feeds) => {
     console.log(write);
 
     axios
