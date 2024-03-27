@@ -1,4 +1,3 @@
-import React from "react";
 import Pagination from "react-js-pagination";
 
 interface CustomPaginationProps {
@@ -11,10 +10,9 @@ interface CustomPaginationProps {
 function CustomPagination({
   onPageChange,
   currentPage,
+  itemsPerPage,
   totalItemsCount,
 }: CustomPaginationProps) {
-  const itemsPerPage = 6;
-
   return (
     <Pagination
       activePage={currentPage}
@@ -29,6 +27,7 @@ function CustomPagination({
       nextPageText="다음"
       firstPageText="처음"
       lastPageText="마지막"
+      hideNavigation={false}
       hideFirstLastPages={true}
     />
   );
