@@ -23,7 +23,6 @@ export default function Feed({ data }: any) {
     created,
     likes,
     comments,
-    comment,
     image,
     content,
     id,
@@ -150,7 +149,7 @@ export default function Feed({ data }: any) {
           </div>
         </div>
       </li>
-      <li className="flex justify-center mt-2 hidden s:inline-block">
+      <li className="hidden justify-center mt-2  s:inline-block">
         <div className="flex space-x-3">
           <p className="flex items-center">
             <FaHeart className="mr-2" />
@@ -158,7 +157,7 @@ export default function Feed({ data }: any) {
           </p>
           <p className="flex items-center">
             <AiOutlineMessage className="mr-2" />
-            {comment}
+            {comments.length}
           </p>
         </div>
       </li>

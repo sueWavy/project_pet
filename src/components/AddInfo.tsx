@@ -191,7 +191,7 @@ function AddInfo() {
         <div className="flex justify-center mt-8 space-x-5">
           <button
             className="dark:bg-orange-400 bg-sky-500 text-white p-3 rounded-2xl hover:brightness-125"
-            onClick={(e: React.MouseEvent) => {
+            onClick={() => {
               handleSubmit;
             }}
           >

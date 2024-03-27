@@ -12,8 +12,7 @@ export default function MyPage() {
     updateUser(userData.userKey);
   }, []);
 
-  const { email, userId, name, profileImg, feed, comment, join, pets } =
-    useUserStore();
+  const { email, name, profileImg, feed, comment, join, pets } = useUserStore();
 
   /** 생년월일 나이로 바꾸기 */
   const birthToAge = (birthDateString: string) => {

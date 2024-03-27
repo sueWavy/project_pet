@@ -38,9 +38,12 @@ function Map({ addStr }: MapProps) {
           position: coords, // 마커 위치 설정
         });
         // 정보창 생성
-        let infowindow = new kakao.maps.InfoWindow({});
+        let infowindow = new kakao.maps.InfoWindow({
+          content:
+            '<div style="width:150px;text-align:center;padding:6px 0; color:black;">근처에서 만나요</div>',
+        });
         // 정보창 열기
-        infowindow.open(map);
+        infowindow.open(map, marker);
         // 검색한 위치를 중심으로 설정
         map.setCenter(coords);
       }
