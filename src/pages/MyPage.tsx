@@ -59,9 +59,6 @@ export default function MyPage() {
                   </div>
                   <div className="space-x-2">
                     <button className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none">
-                      수정
-                    </button>
-                    <button className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none">
                       삭제
                     </button>
                   </div>

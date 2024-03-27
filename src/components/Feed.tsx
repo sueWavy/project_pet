@@ -16,9 +16,12 @@ import { useUserStore } from "../store/User";
 import CommentBar from "./CommentBar";
 
 export default function Feed({ data }: any) {
+  console.log(data);
+
   const key = useUserStore((state) => state.userKey);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isComment, setIsComment] = useState<boolean>(false);
   const [editData, setEditData] = useState<Feeds>({
     key: key,
     title: data.title,
@@ -31,6 +34,10 @@ export default function Feed({ data }: any) {
 
   const { clickLikes } = useLikes();
   const { deleteFeed, editFeed, isEdit, handleEdit } = useFeed();
+
+  const handleComment = () => {
+    setIsComment((prev) => !prev);
+  };
 
   const handleOpen = () => {
     if (!key) {
@@ -100,7 +107,8 @@ export default function Feed({ data }: any) {
           <p className="text-2xl s:text-xl dark:text-white">{data.writer}</p>
         </div>
         <span className="flex items-center text-slate-500 text-lg s:text-sm">
-          {data.created.slice(0, 11)}
+          {data.created}
+
           <MdOutlineDateRange className="ml-3" />
         </span>
       </li>
@@ -181,7 +189,7 @@ export default function Feed({ data }: any) {
           )}
 
           <button
-            className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
+            className="sm:text-xs bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
             onClick={handleOpen}
           >
             모임 장소
@@ -194,7 +202,10 @@ export default function Feed({ data }: any) {
               수정하기
             </button>
           ) : (
-            <button className="bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white ">
+            <button
+              onClick={handleComment}
+              className="sm:text-xs bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
+            >
               댓글보기
             </button>
           )}
@@ -222,9 +233,11 @@ export default function Feed({ data }: any) {
       </li>
 
       {/* 댓글창 <CommentBar/> */}
-      <li>
-        <CommentBar comments={data.comments} feedId={data.id} />
-      </li>
+      {isComment && (
+        <li>
+          <CommentBar comments={data.comments} feedId={data.id} />
+        </li>
+      )}
       <li className="flex justify-center space-x-3 p-3 bg-sky-100 dark:bg-yellow-100 s:text-sm">
         <div className="flex sm:flex-col sm:text-center sm:justify-center sm:items-center">
           <p className="flex items-center mr-2">
