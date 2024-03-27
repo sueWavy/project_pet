@@ -6,7 +6,6 @@ const useLogin = () => {
   const navigate = useNavigate();
   const updateUserStore = useUserStore((state) => state.updateUser);
   const userLogout = useUserStore((state) => state.userLogout);
-  const userInfo = useUserStore();
 
   const kakaoLogin = async () => {
     try {
@@ -78,7 +77,7 @@ const useLogin = () => {
     });
   };
 
-  return { kakaoLogin, logout, loginWithKakao };
+  return { kakaoLogin, logout, loginWithKakao, updateUser };
 };
 
 export default useLogin;

@@ -1,8 +1,17 @@
 import { useUserStore } from "../store/User";
 import noProfile from "../assets/noProfile.jpg";
+import useLogin from "../hooks/useLogin";
+import { useEffect } from "react";
 
 export default function MyPage() {
-  // const userData = useUserStore((state) => state);
+  const userData = useUserStore((state) => state);
+  const { updateUser } = useLogin();
+
+  // 유저 정보 업데이트하기
+  useEffect(() => {
+    updateUser(userData.userKey);
+  }, []);
+
   const { email, userId, name, profileImg, feed, comment, join, pets } =
     useUserStore();
 

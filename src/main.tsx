@@ -13,6 +13,8 @@ import Write from "./pages/Write.tsx";
 import View from "./pages/View.tsx";
 import KakaO from "./pages/Kakao.tsx";
 import ProtectedRoute from "./pages/ProtectRoute.ts";
+import { useEffect } from "react";
+import useLogin from "./hooks/useLogin.ts";
 
 const { Kakao } = window;
 
