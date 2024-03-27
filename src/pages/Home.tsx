@@ -1,6 +1,6 @@
 import { useGetData } from "../hooks/useGetData";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import Pagination from "react-js-pagination";
+import { useEffect, useMemo, useState } from "react";
+import CustomPagination from "../components/CustomPagination";
 import WeatherBar from "../components/weather/WeatherBar";
 import SearchBar from "../components/SearchBar";
 import Feed from "../components/Feed";
@@ -92,7 +92,7 @@ export default function Home() {
       setFeedData(data.list); // 피드 데이터 저장
       setCurrentPage(1); // 현재 페이지 1번으로 설정
     }
-  }, [data]);
+  }, []);
 
   /** 페이지네이션 이동 기능 */
   const handlePageChange = (pageNumber: number) => {
@@ -124,21 +124,11 @@ export default function Home() {
           handleClick={handleClick}
           handleCopy={handleCopy}
         />
-        <Pagination
-          activePage={currentPage}
-          itemsCountPerPage={itemsPerPage}
+        <CustomPagination
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
           totalItemsCount={sortedFeedData.length}
-          pageRangeDisplayed={4}
-          onChange={handlePageChange}
-          innerClass="pagination flex justify-center space-x-3 items-center p-3 bg-white -mb-5 dark:bg-gray-700"
-          itemClass="bg-sky-300 px-2 rounded-full dark:bg-slate-900"
-          linkClass="text-white text-lg flex justify-center items-center"
-          activeClass="bg-sky-500 px-2 rounded-full dark:bg-yellow-500"
-          prevPageText="이전"
-          nextPageText="다음"
-          firstPageText="처음"
-          lastPageText="마지막"
-          hideFirstLastPages={true}
+          onPageChange={handlePageChange}
         />
         <div className="flex-col justify-center items-center text-center bg-white w-full dark:bg-gray-700 p-5">
           {!isLikes &&

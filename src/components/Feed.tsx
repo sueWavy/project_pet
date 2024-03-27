@@ -105,7 +105,6 @@ export default function Feed({ data }: any) {
         </div>
         <span className="flex items-center text-slate-500 text-lg s:text-sm">
           {data.created}
-
           <MdOutlineDateRange className="ml-3" />
         </span>
       </li>
@@ -118,6 +117,7 @@ export default function Feed({ data }: any) {
               name="title"
               className="absolute w-full h-full top-0 left-0 pl-10 placeholder:pl-10 border-2 border-blue-300"
               placeholder="변경할 제목을 입력하세요"
+              defaultValue={data.title}
             />
           )}
           <h2 className="flex items-center pl-10 font-bold text-xl s:text-base s:pl-0">
@@ -126,7 +126,7 @@ export default function Feed({ data }: any) {
           </h2>
           <div className="flex space-x-3 s:hidden">
             <p className="flex items-center">
-              <FaHeart className="mr-2" />
+              <FaHeart className="mr-2 text-red-500 dark:text-yellow-400" />
               {data.likes}
             </p>
             <p className="flex items-center">
@@ -160,6 +160,7 @@ export default function Feed({ data }: any) {
             name="content"
             className="w-full h-full absolute top-0 left-0 p-3 placeholder:p-3 border-2 border-blue-300"
             placeholder="수정할 내용을 적어주세요"
+            defaultValue={data.content}
           />
         )}
       </li>
@@ -229,7 +230,7 @@ export default function Feed({ data }: any) {
         )}
       </li>
 
-      {/* 댓글창 <CommentBar/> */}
+      {/* 댓글창 */}
       {isComment && (
         <li>
           <CommentBar comments={data.comments} feedId={data.id} />
@@ -263,6 +264,7 @@ export default function Feed({ data }: any) {
                 className="w-full text-center"
                 type="time"
                 name="time"
+                defaultValue={data.time}
               />
             </div>
           ) : (

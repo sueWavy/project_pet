@@ -30,7 +30,7 @@ export default function ScrollTopBtn() {
     <button
       className={`${
         isScroll ? "bottom-40" : "-bottom-96"
-      } fixed right-[16.5%] l:right-[5%] bg-sky-300 text-white p-3 rounded-full dark:bg-slate-500 hover:brightness-110 dark:hover:brightness-125 transition-all ease-out duration-500`}
+      } fixed right-[16.5%] l:right-[5%] bg-sky-300 text-white p-3 rounded-full z-50 dark:bg-slate-500 hover:brightness-110 dark:hover:brightness-125 transition-all ease-out duration-500`}
       onClick={scrollToTop}
     >
       <MdPets />

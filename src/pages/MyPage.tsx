@@ -30,6 +30,22 @@ export default function MyPage() {
     return age;
   };
 
+  const activity = feed + comment;
+
+  const acticityLevel = () => {
+    if (activity < 9) {
+      return "활동량이 낮아요 🥲";
+    } else if (activity > 10) {
+      return "활동하기 시작했어요 🙂";
+    } else if (activity > 19) {
+      return "활동 중이에요 😊";
+    } else if (activity > 29) {
+      return "활발하게 이용해요 🥰";
+    } else if (activity > 39) {
+      return "멍미팅 커뮤니터 😎";
+    }
+  };
+
   return (
     <section className="w-full flex justify-center">
       <div className="flex justify-center w-3/4 dark:bg-slate-900 bg-white l:w-full">
@@ -92,7 +108,11 @@ export default function MyPage() {
                 </h3>
                 <li>작성 게시글 : {feed}</li>
                 <li>작성 댓글 : {comment}</li>
-                <li>활동량이 낮아요 😢</li>
+                <li>
+                  <span className="bg-orange-100 p-3 rounded-2xl">
+                    {acticityLevel()}
+                  </span>
+                </li>
               </ul>
             </div>
           </div>
