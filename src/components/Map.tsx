@@ -11,7 +11,7 @@ interface MapProps {
 }
 
 function Map({ addStr }: MapProps) {
-  console.log(addStr);
+  // console.log(addStr);
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

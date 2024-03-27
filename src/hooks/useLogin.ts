@@ -37,15 +37,15 @@ const useLogin = () => {
     }
   };
 
-  const updateUser = (token: any) => {
-    axios
+  const updateUser = async (token: any) => {
+    await axios
       .get("http://43.201.39.118/api/me", {
         headers: {
           Authorization: "bearer " + token,
         },
       })
       .then((res) => {
-        console.log("카카오 정보 : ", res.data);
+        // console.log("카카오 정보 : ", res.data);
         updateUserStore({
           email: res.data.data.email,
           name: res.data.data.name,
@@ -56,7 +56,7 @@ const useLogin = () => {
           profileImg: res.data.data.profile,
           userId: res.data.data.id,
         });
-        console.log("업데이트 정보 ! ", userInfo);
+        // console.log("업데이트 정보 ! ", userInfo);
       })
       .catch((error: any) => {
         console.error("유저 정보 실패 : ", error);
@@ -69,10 +69,10 @@ const useLogin = () => {
     window.location.reload();
   };
 
-  const loginWithKakao = () => {
+  const loginWithKakao = async () => {
     const { Kakao } = window;
 
-    Kakao.Auth.authorize({
+    await Kakao.Auth.authorize({
       redirectUri: "http://localhost:5173/kakao",
       state: "username",
     });

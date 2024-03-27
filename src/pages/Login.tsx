@@ -11,9 +11,8 @@ export default function Login() {
   // function code
   const { loginWithKakao } = useLogin();
 
-  const handleLogin = async () => {
-    await loginWithKakao();
-    // window.location.reload();
+  const handleLogin = () => {
+    loginWithKakao();
   };
 
   // layout

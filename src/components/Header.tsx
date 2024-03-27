@@ -14,7 +14,7 @@ export default function Header() {
   const userData = useUserStore((state) => state);
   const userProfile = useUserStore((state) => state.profileImg);
 
-  console.log("유저 데이터 확인 : ", userData);
+  // console.log("유저 데이터 확인 : ", userData);
 
   const navigate = useNavigate();
 

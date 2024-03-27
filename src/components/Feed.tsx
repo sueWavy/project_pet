@@ -16,8 +16,6 @@ import { useUserStore } from "../store/User";
 import CommentBar from "./CommentBar";
 
 export default function Feed({ data }: any) {
-  console.log(data);
-
   const key = useUserStore((state) => state.userKey);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);

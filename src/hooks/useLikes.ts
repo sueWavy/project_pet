@@ -7,12 +7,12 @@ const useLikes = () => {
   const queryClient = useQueryClient();
 
   /** 좋아요 (즐겨찾기 기능) */
-  const clickLikes = (feedId: number) => {
+  const clickLikes = async (feedId: number) => {
     if (!key) {
       alert("로그인 후 이용 가능합니다.");
       return;
     }
-    axios
+    await axios
       .post(
         "http://43.201.39.118/api/feed",
         {
