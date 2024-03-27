@@ -42,48 +42,50 @@ export default function MyPage() {
               </div>
             </div>
           </div>
-          <div className="flex justify-evenly w-full ml:flex-wrap ml:space-y-10">
-            <ul className="bg-white dark:bg-gray-700 dark:text-white rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
-              <h3 className="bg-green-400 h-14 flex justify-center items-center text-white text-xl font-bold">
-                함께 하고 있는 반려견
-              </h3>
-              <button className="bg-green-200 px-5 py-1 rounded-full text-slate-600 hover:bg-green-500 hover:text-white">
-                반려견 추가하기
-              </button>
-              {pets.map((it) => (
-                <li key={it.id} className="flex justify-evenly">
-                  <div>
-                    {it.name} ( {it.breed} ) &nbsp;
-                    {it.gender === "male" ? "왕자" : "공주"} &nbsp; - &nbsp;
-                    {birthToAge(it.birth)} 세
-                  </div>
-                  <div className="space-x-2">
-                    <button className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none">
-                      삭제
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <ul className="bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
-              <h3 className="bg-yellow-400 h-14 flex justify-center items-center text-white text-xl font-bold">
-                내 회원정보
-              </h3>
-              <button className="bg-yellow-200 px-5 py-1 rounded-full text-slate-600 hover:bg-yellow-400 hover:text-white">
-                이름 수정하기
-              </button>
-              <li>이름 : {name}</li>
-              <li>이메일 : {email}</li>
-              <li>가입일자 : {join.slice(0, 10)}</li>
-            </ul>
-            <ul className="bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
-              <h3 className="bg-orange-400 h-14 flex justify-center items-center text-white text-xl font-bold">
-                내 활동내역
-              </h3>
-              <li>작성 게시글 : {feed}</li>
-              <li>작성 댓글 : {comment}</li>
-              <li>활동량이 낮아요 😢</li>
-            </ul>
+          <div className="flex justify-center items-center">
+            <div className="grid grid-cols-3 gap-7 ml:grid-cols-2 sm:flex sm:flex-col">
+              <ul className="bg-white dark:bg-gray-700 dark:text-white rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
+                <h3 className="bg-green-400 h-14 flex justify-center items-center text-white text-xl font-bold">
+                  함께 하고 있는 반려견
+                </h3>
+                <button className="bg-green-200 px-5 py-1 rounded-full text-slate-600 hover:bg-green-500 hover:text-white">
+                  반려견 추가하기
+                </button>
+                {pets.map((it) => (
+                  <li key={it.id} className="flex justify-evenly">
+                    <div>
+                      {it.name} ( {it.breed} ) &nbsp;
+                      {it.gender === "male" ? "왕자" : "공주"} &nbsp; - &nbsp;
+                      {birthToAge(it.birth)} 세
+                    </div>
+                    <div className="space-x-2">
+                      <button className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none">
+                        삭제
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <ul className="bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
+                <h3 className="bg-yellow-400 h-14 flex justify-center items-center text-white text-xl font-bold">
+                  내 회원정보
+                </h3>
+                <button className="bg-yellow-200 px-5 py-1 rounded-full text-slate-600 hover:bg-yellow-400 hover:text-white">
+                  이름 수정하기
+                </button>
+                <li>이름 : {name}</li>
+                <li>이메일 : {email}</li>
+                <li>가입일자 : {join.slice(0, 10)}</li>
+              </ul>
+              <ul className="bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5">
+                <h3 className="bg-orange-400 h-14 flex justify-center items-center text-white text-xl font-bold">
+                  내 활동내역
+                </h3>
+                <li>작성 게시글 : {feed}</li>
+                <li>작성 댓글 : {comment}</li>
+                <li>활동량이 낮아요 😢</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
