@@ -27,8 +27,7 @@ function CustomPagination({
       nextPageText="다음"
       firstPageText="처음"
       lastPageText="마지막"
-      hideNavigation={false}
-      hideFirstLastPages={true}
+      hideFirstLastPages={false}
     />
   );
 }

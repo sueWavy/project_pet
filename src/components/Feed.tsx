@@ -16,6 +16,20 @@ import { useUserStore } from "../store/User";
 import CommentBar from "./CommentBar";
 
 export default function Feed({ data }: any) {
+  const {
+    profile,
+    title,
+    writer,
+    created,
+    likes,
+    comments,
+    comment,
+    image,
+    content,
+    id,
+    address,
+    time,
+  } = data;
   const key = useUserStore((state) => state.userKey);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -98,13 +112,13 @@ export default function Feed({ data }: any) {
       <li className="flex items-center justify-between py-2 px-6 bg-sky-200 dark:bg-black">
         <div className="flex items-center space-x-2">
           <img
-            src={data.profile ? data.profile : noProfile}
+            src={profile ? profile : noProfile}
             className="w-14 h-14 s:w-12 s:h-12 object-cover rounded-full border-2 border-white dark:border-yellow-300"
           />
-          <p className="text-2xl s:text-xl dark:text-white">{data.writer}</p>
+          <p className="text-2xl s:text-xl dark:text-white">{writer}</p>
         </div>
         <span className="flex items-center text-slate-500 text-lg s:text-sm">
-          {data.created}
+          {created}
           <MdOutlineDateRange className="ml-3" />
         </span>
       </li>
@@ -117,21 +131,21 @@ export default function Feed({ data }: any) {
               name="title"
               className="absolute w-full h-full top-0 left-0 pl-10 placeholder:pl-10 border-2 border-blue-300"
               placeholder="변경할 제목을 입력하세요"
-              defaultValue={data.title}
+              defaultValue={title}
             />
           )}
           <h2 className="flex items-center pl-10 font-bold text-xl s:text-base s:pl-0">
             <GiSittingDog className="mr-3" />
-            {data.title}
+            {title}
           </h2>
           <div className="flex space-x-3 s:hidden">
             <p className="flex items-center">
               <FaHeart className="mr-2 text-red-500 dark:text-yellow-400" />
-              {data.likes}
+              {likes}
             </p>
             <p className="flex items-center">
               <AiOutlineMessage className="mr-2" />
-              {data.comments.length}
+              {comments.length}
             </p>
           </div>
         </div>
@@ -140,27 +154,27 @@ export default function Feed({ data }: any) {
         <div className="flex space-x-3">
           <p className="flex items-center">
             <FaHeart className="mr-2" />
-            {data.likes}
+            {likes}
           </p>
           <p className="flex items-center">
             <AiOutlineMessage className="mr-2" />
-            {data.comment}
+            {comment}
           </p>
         </div>
       </li>
 
       <li className="flex justify-center">
-        <img src={data.image} className="w-3/4 rounded-3xl p-3  object-cover" />
+        <img src={image} className="w-3/4 rounded-3xl p-3  object-cover" />
       </li>
       <li className="p-3 relative min-h-24">
-        <p className="text-balance">{data.content}</p>
+        <p className="text-balance">{content}</p>
         {isEdit && (
           <textarea
             onChange={handleChange}
             name="content"
             className="w-full h-full absolute top-0 left-0 p-3 placeholder:p-3 border-2 border-blue-300"
             placeholder="수정할 내용을 적어주세요"
-            defaultValue={data.content}
+            defaultValue={content}
           />
         )}
       </li>
@@ -176,11 +190,11 @@ export default function Feed({ data }: any) {
             </button>
           ) : (
             <button
-              onClick={() => clickLikes(data.id)}
+              onClick={() => clickLikes(id)}
               className={`${data.like ? "text-red-400" : "text-white"} ${
                 data.like ? "dark:text-yellow-400" : "text-white"
               }  bg-sky-300 border dark:border-none dark:hover:bg-gray-600 
-             dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white`}
+             dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400`}
             >
               ♥
             </button>
@@ -194,7 +208,7 @@ export default function Feed({ data }: any) {
           </button>
           {isEdit ? (
             <button
-              onClick={() => editFeed(data.id, editData)}
+              onClick={() => editFeed(id, editData)}
               className="bg-green-400 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-green-500 hover:text-white "
             >
               수정하기
@@ -217,14 +231,14 @@ export default function Feed({ data }: any) {
           )}
           {data.revise && (
             <button
-              onClick={() => deleteFeed(data.id)}
+              onClick={() => deleteFeed(id)}
               className=" bg-red-300 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-red-400 hover:text-white "
             >
               <RiDeleteBinFill />
             </button>
           )}
         </div>
-        {isOpen && !isEdit && <Map addStr={data.address} />}
+        {isOpen && !isEdit && <Map addStr={address} />}
         {isOpen && isEdit && editData.address.length > 5 && (
           <Map addStr={editData.address} />
         )}
@@ -233,7 +247,7 @@ export default function Feed({ data }: any) {
       {/* 댓글창 */}
       {isComment && (
         <li>
-          <CommentBar comments={data.comments} feedId={data.id} />
+          <CommentBar comments={comments} feedId={id} />
         </li>
       )}
       <li className="flex justify-center space-x-3 p-3 bg-sky-100 dark:bg-yellow-100 s:text-sm">
@@ -244,12 +258,10 @@ export default function Feed({ data }: any) {
           </p>
           {isEdit ? (
             <p className="sm:border-t border-slate-400 sm:mt-1">
-              {editData.address.length > 5 ? editData.address : data.address}
+              {editData.address.length > 5 ? editData.address : address}
             </p>
           ) : (
-            <p className="sm:border-t border-slate-400 sm:mt-1">
-              {data.address}
-            </p>
+            <p className="sm:border-t border-slate-400 sm:mt-1">{address}</p>
           )}
         </div>
       </li>
@@ -264,7 +276,7 @@ export default function Feed({ data }: any) {
                 className="w-full text-center"
                 type="time"
                 name="time"
-                defaultValue={data.time}
+                defaultValue={time}
               />
             </div>
           ) : (

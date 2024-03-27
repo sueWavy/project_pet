@@ -7,6 +7,8 @@ export default function MyPage() {
   const userData = useUserStore((state) => state);
   const { updateUser } = useLogin();
 
+  console.log(userData);
+
   // 유저 정보 업데이트하기
   useEffect(() => {
     updateUser(userData.userKey);
@@ -35,15 +37,16 @@ export default function MyPage() {
   const acticityLevel = () => {
     if (activity < 9) {
       return "활동량이 낮아요 🥲";
-    } else if (activity > 10) {
+    } else if (activity > 10 && activity == 19) {
       return "활동하기 시작했어요 🙂";
-    } else if (activity > 19) {
+    } else if (activity > 19 && activity == 20) {
       return "활동 중이에요 😊";
-    } else if (activity > 29) {
+    } else if (activity > 29 && activity == 30) {
       return "활발하게 이용해요 🥰";
     } else if (activity > 39) {
       return "멍미팅 커뮤니터 😎";
     }
+    return;
   };
 
   return (

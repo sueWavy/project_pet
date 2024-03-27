@@ -1,4 +1,3 @@
-import Pagination from "react-js-pagination";
 import { useGetData } from "../hooks/useGetData";
 import { useEffect, useMemo, useState } from "react";
 import CustomPagination from "../components/CustomPagination";
@@ -7,6 +6,8 @@ import SearchBar from "../components/SearchBar";
 import Feed from "../components/Feed";
 import ScrollTopBtn from "../components/ScrollTopBtn";
 import { useUserStore } from "../store/User";
+
+import noFeed from "../assets/noFeed.mp4";
 
 export default function Home() {
   const key = useUserStore((state) => state.userKey);
@@ -53,12 +54,13 @@ export default function Home() {
     if (!data || !data.list) return [];
     let filteredAndSorted = [...data.list];
 
-    // 검색 데이터
+    // 검색어 적용한 데이터
     filteredAndSorted = filteredAndSorted.filter((item) =>
       item.title.toLowerCase().includes(searchTxt.toLowerCase())
     );
 
-    // 좋아요(즐겨찾기) 데이터
+    // 좋아요(즐겨찾기) 적용한 데이터
+    // isLikes 상태면 위에 검색어 적용한 데이터에서 like값이 true인지 한번 더 필터링
     if (isLikes) {
       filteredAndSorted = filteredAndSorted.filter((item) => item.like);
     }
@@ -145,6 +147,20 @@ export default function Home() {
           onPageChange={handlePageChange}
         />
         <div className="flex-col justify-center items-center text-center bg-white w-full dark:bg-gray-700 p-5">
+          {currentItems.length === 0 && (
+            <div className="relative">
+              <video
+                className="object-cover rounded-2xl"
+                src={noFeed}
+                autoPlay
+                loop
+                muted
+              />
+              <span className="absolute top-20 left-1/2 transform -translate-x-1/2  font-['YEONGJUPunggiGinsengTTF'] bg-white text-2xl p-5 rounded-full opacity-80 md:text-base sm:text-xs">
+                검색어에 일치하거나 좋아요한 글이 없어요
+              </span>
+            </div>
+          )}
           {currentItems.map((item) => (
             <div key={item.id} className="flex justify-center">
               <Feed key={item.id} data={item} />
