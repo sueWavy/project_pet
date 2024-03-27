@@ -20,14 +20,14 @@ export default function Home() {
   /** 페이지 상단 스크롤 기능 */
   const scrollTop = () => {
     window.scrollTo({
-      top: 50,
+      top: 0,
       behavior: "smooth",
     });
   };
 
   // 처음 Home 진입시 상단으로 스크롤 업
   useEffect(() => {
-    scrollTop;
+    scrollTop();
   }, []);
 
   /** 좋아요 (즐겨찾기) 기능 */

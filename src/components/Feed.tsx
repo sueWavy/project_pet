@@ -55,7 +55,6 @@ export default function Feed({ data }: any) {
       ...prevWrite,
       [e.target.name]: e.target.value,
     }));
-    console.log(editData);
   };
 
   const onClickAddr = () => {

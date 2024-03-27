@@ -1,22 +1,22 @@
 import axios from "axios";
+import { Feeds } from "../pages/Write";
 import { useUserStore } from "../store/User";
+import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
-const useLikes = () => {
+const useWrite = () => {
   const key = useUserStore((state) => state.userKey);
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  /** 좋아요 (즐겨찾기 기능) */
-  const clickLikes = async (feedId: number) => {
-    if (!key) {
-      alert("로그인 후 이용 가능합니다.");
-      return;
-    }
+  const addFeed = async (write: Feeds) => {
+    // console.log(write);
+
     await axios.post(
       "http://43.201.39.118/api/feed",
       {
-        mode: "reaction",
-        feed: feedId,
+        mode: "write",
+        data: write,
       },
       {
         headers: {
@@ -24,11 +24,13 @@ const useLikes = () => {
         },
       }
     );
-    // .then((res) => console.log("좋아요 확인 : ", res, res.data));
+    // .then((res) => console.log("게시글 작성", res, res.data));
     queryClient.invalidateQueries({ queryKey: ["data"] });
+    alert("게시글을 작성했습니다");
+    navigate("/");
   };
 
-  return { clickLikes };
+  return { addFeed };
 };
 
-export default useLikes;
+export default useWrite;

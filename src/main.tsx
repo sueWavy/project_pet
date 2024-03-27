@@ -12,6 +12,7 @@ import MyPage from "./pages/MyPage.tsx";
 import Write from "./pages/Write.tsx";
 import View from "./pages/View.tsx";
 import KakaO from "./pages/Kakao.tsx";
+import ProtectedRoute from "./pages/ProtectRoute.ts";
 
 const { Kakao } = window;
 
@@ -46,9 +47,23 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/kakao", element: <KakaO /> },
-      { path: "/mypage/:id", element: <MyPage /> },
+      {
+        path: "/mypage/:id",
+        element: (
+          <ProtectedRoute>
+            <MyPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: "/view/:id", element: <View /> },
-      { path: "/write", element: <Write /> },
+      {
+        path: "/write",
+        element: (
+          <ProtectedRoute>
+            <Write />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

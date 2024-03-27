@@ -4,6 +4,7 @@ import { useUserStore } from "../store/User";
 import Map from "../components/Map";
 import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import useWrite from "../hooks/useWrite";
 
 export interface Feeds {
   key: string;
@@ -30,11 +31,7 @@ export default function Write() {
     content: "",
   });
 
-  // 현재 시간 구하기
-  const currentDate = new Date().toLocaleString("ko-KR", {
-    timeZone: "Asia/Seoul",
-  });
-  console.log(currentDate);
+  const { addFeed } = useWrite();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,7 +65,7 @@ export default function Write() {
         writer: userName,
         [e.target.name]: e.target.value,
       }));
-      console.log(write);
+      // console.log(write);
     }
   };
 
@@ -77,7 +74,7 @@ export default function Write() {
     window.daum.postcode.load(() => {
       const postcode = new window.daum.Postcode({
         oncomplete: function (data: any) {
-          console.log(data);
+          // console.log(data);
           setWrite((prevWrite) => ({
             ...prevWrite,
             address: data.address,
@@ -86,28 +83,6 @@ export default function Write() {
       });
       postcode.open();
     });
-  };
-
-  const AddFeed = (write: Feeds) => {
-    console.log(write);
-
-    axios
-      .post(
-        "http://43.201.39.118/api/feed",
-        {
-          mode: "write",
-          data: write,
-        },
-        {
-          headers: {
-            Authorization: "bearer " + key,
-          },
-        }
-      )
-      .then((res) => console.log("게시글 작성", res, res.data));
-    console.log("데이터 확인", write);
-    alert("게시글을 작성했습니다");
-    navigate("/");
   };
 
   // 다크 모드 확인
@@ -190,7 +165,7 @@ export default function Write() {
             <input
               type="text"
               className="w-full placeholder:text-center py-4 text-center"
-              placeholder="주소 내용"
+              placeholder="주소 내용(주소 검색에서 찾아주세요)"
               value={write.address}
               readOnly={true}
               name="address"
@@ -220,7 +195,7 @@ export default function Write() {
           <li>
             <button
               className="font-['YEONGJUPunggiGinsengTTF'] bg-blue-400 dark:bg-slate-500 text-white text-xl w-full h-16 rounded-bl-xl rounded-br-xl hover:bg-blue-500 dark:hover:bg-slate-700"
-              onClick={() => AddFeed(write)}
+              onClick={() => addFeed(write)}
             >
               작성하기
             </button>
