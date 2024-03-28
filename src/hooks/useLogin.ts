@@ -36,6 +36,40 @@ const useLogin = () => {
     }
   };
 
+  const googleLogin = async (credentials: any) => {
+    try {
+      const res = await axios.post(
+        "http://43.201.39.118/api/login",
+        {
+          mode: "google",
+          code: credentials,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log(res);
+
+      const token = res.data.token;
+      const isFirst = res.data.first;
+      console.log(token);
+
+      updateUserStore({
+        isLogin: true,
+        isFirst: isFirst,
+        userKey: token,
+      });
+
+      updateUser2(token);
+      console.log(token);
+    } catch (error) {
+      console.error("Login error : ", error);
+    }
+  };
+
   const updateUser = async (token: any) => {
     await axios
       .get("http://43.201.39.118/api/me", {
@@ -44,7 +78,7 @@ const useLogin = () => {
         },
       })
       .then((res) => {
-        // console.log("카카오 정보 : ", res.data);
+        console.log("카카오 정보 : ", res.data);
         updateUserStore({
           email: res.data.data.email,
           name: res.data.data.name,
@@ -55,6 +89,32 @@ const useLogin = () => {
           profileImg: res.data.data.profile,
           userId: res.data.data.id,
         });
+        // console.log("업데이트 정보 ! ", userInfo);
+      })
+      .catch((error: any) => {
+        console.error("유저 정보 실패 : ", error);
+      });
+  };
+
+  const updateUser2 = async (token: any) => {
+    await axios
+      .get("http://43.201.39.118/api/me", {
+        headers: {
+          Authorization: "bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log("구글 정보 : ", res.data);
+        // updateUserStore({
+        //   email: res.data.data.email,
+        //   name: res.data.data.name,
+        //   join: res.data.data.created,
+        //   feed: res.data.data.feeds,
+        //   pets: res.data.data.pets,
+        //   comment: res.data.data.comments,
+        //   profileImg: res.data.data.profile,
+        //   userId: res.data.data.id,
+        // });
         // console.log("업데이트 정보 ! ", userInfo);
       })
       .catch((error: any) => {
@@ -77,7 +137,7 @@ const useLogin = () => {
     });
   };
 
-  return { kakaoLogin, logout, loginWithKakao, updateUser };
+  return { kakaoLogin, logout, loginWithKakao, updateUser, googleLogin };
 };
 
 export default useLogin;

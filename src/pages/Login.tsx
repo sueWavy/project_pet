@@ -2,10 +2,11 @@ import dogVideo from "../assets/dog.mp4";
 import useLogin from "../hooks/useLogin";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { GoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
 
 export default function Login() {
   // 카카오 로그인 hook에서 가져오기
-  const { loginWithKakao } = useLogin();
+  const { loginWithKakao, googleLogin } = useLogin();
 
   /** 카카오 로그인 기능 */
   const handleLogin = () => {
@@ -35,6 +36,7 @@ export default function Login() {
             <GoogleLogin
               onSuccess={(credentialResponse) => {
                 console.log(credentialResponse);
+                googleLogin(credentialResponse.clientId);
               }}
               onError={() => {
                 console.log("구글 로그인 실패");
