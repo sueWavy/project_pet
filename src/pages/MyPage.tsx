@@ -13,6 +13,8 @@ export default function MyPage() {
   const [openAdd, setOpenAdd] = useState<boolean>(false);
   const { data } = useGetData();
 
+  console.log(userData);
+
   const handleEdit = () => {
     setOpenEdit((prev) => !prev);
   };
