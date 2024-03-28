@@ -36,7 +36,7 @@ export default function Login() {
             <GoogleLogin
               onSuccess={(credentialResponse) => {
                 console.log(credentialResponse);
-                googleLogin(credentialResponse.clientId);
+                googleLogin(credentialResponse.credential);
               }}
               onError={() => {
                 console.log("구글 로그인 실패");

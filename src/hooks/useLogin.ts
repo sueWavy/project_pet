@@ -6,6 +6,7 @@ const useLogin = () => {
   const navigate = useNavigate();
   const updateUserStore = useUserStore((state) => state.updateUser);
   const userLogout = useUserStore((state) => state.userLogout);
+  const userInfo = useUserStore();
 
   const kakaoLogin = async () => {
     try {
@@ -51,11 +52,8 @@ const useLogin = () => {
         }
       );
 
-      console.log(res);
-
       const token = res.data.token;
       const isFirst = res.data.first;
-      console.log(token);
 
       updateUserStore({
         isLogin: true,
@@ -64,10 +62,10 @@ const useLogin = () => {
       });
 
       updateUser2(token);
-      console.log(token);
     } catch (error) {
       console.error("Login error : ", error);
     }
+    navigate("/", { replace: true });
   };
 
   const updateUser = async (token: any) => {
@@ -105,17 +103,17 @@ const useLogin = () => {
       })
       .then((res) => {
         console.log("구글 정보 : ", res.data);
-        // updateUserStore({
-        //   email: res.data.data.email,
-        //   name: res.data.data.name,
-        //   join: res.data.data.created,
-        //   feed: res.data.data.feeds,
-        //   pets: res.data.data.pets,
-        //   comment: res.data.data.comments,
-        //   profileImg: res.data.data.profile,
-        //   userId: res.data.data.id,
-        // });
-        // console.log("업데이트 정보 ! ", userInfo);
+        updateUserStore({
+          email: res.data.data.email,
+          name: res.data.data.name,
+          join: res.data.data.created,
+          feed: res.data.data.feeds,
+          pets: res.data.data.pets,
+          comment: res.data.data.comments,
+          profileImg: res.data.data.profile,
+          userId: res.data.data.id,
+        });
+        console.log("업데이트 정보 ! ", userInfo);
       })
       .catch((error: any) => {
         console.error("유저 정보 실패 : ", error);

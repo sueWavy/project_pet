@@ -1,9 +1,8 @@
-import axios from "axios";
-import useLogin from "../hooks/useLogin";
-import React, { useRef, useState } from "react";
-import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
-import { useUserStore } from "../store/User";
+import { FaPlusCircle } from "react-icons/fa";
+import React, { useRef, useState } from "react";
+import useLogin from "../hooks/useLogin";
+import useAddPet from "../hooks/useAddPet";
 
 export interface Pet {
   name: string;
@@ -14,7 +13,7 @@ export interface Pet {
 
 function AddInfo() {
   const { logout } = useLogin();
-  const { userKey } = useUserStore();
+  const { addPet } = useAddPet();
 
   const [pets, setPets] = useState<number>(1);
 
@@ -25,6 +24,8 @@ function AddInfo() {
   const [petInfo, setPetInfo] = useState<Pet[]>([
     { name: "", kind: "", age: "", gender: "male" },
   ]);
+
+  console.log(petInfo);
 
   const onCrease = () => {
     setPets((prev) => prev + 1);
@@ -55,25 +56,6 @@ function AddInfo() {
     });
   };
 
-  const AddPet = (petInfo: Pet[]) => {
-    console.log(userKey);
-
-    axios
-      .post(
-        "http://43.201.39.118/api/login",
-        {
-          mode: "additional",
-          list: petInfo,
-        },
-        {
-          headers: {
-            Authorization: "bearer " + userKey,
-          },
-        }
-      )
-      .then((res) => console.log("펫 정보 등록", res.data));
-  };
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -93,10 +75,10 @@ function AddInfo() {
       petAge.current?.focus();
       return;
     }
-    AddPet(petInfo);
+    addPet(petInfo);
   };
 
-  //   Style
+  // 중복 스타일
   const InputBtn =
     "dark:bg-black ml-2 flex justify-center items-center rounded-full bg-brand text-white";
 
@@ -105,7 +87,7 @@ function AddInfo() {
 
   return (
     <div className="fixed w-2/4 sm:w-3/4  max-h-custom top-36  dark:bg-slate-900 bg-white z-30 pt-20 pb-20 rounded-full shadow-md overflow-y-scroll">
-      <form className="text-center">
+      <form onSubmit={handleSubmit} className="text-center">
         <p className="text-xl text-black dark:text-white">
           처음 접속하신 견주님이시군요
         </p>
