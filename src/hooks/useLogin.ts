@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store/User";
+import { useQueryClient } from "@tanstack/react-query";
 
 const useLogin = () => {
   const navigate = useNavigate();
   const updateUserStore = useUserStore((state) => state.updateUser);
   const userLogout = useUserStore((state) => state.userLogout);
-  const userInfo = useUserStore();
+  const queryClient = useQueryClient();
 
   const kakaoLogin = async () => {
     try {
@@ -32,6 +33,7 @@ const useLogin = () => {
 
       updateUser(token);
       navigate("/", { replace: true });
+      queryClient.invalidateQueries({ queryKey: ["data"] });
     } catch (error) {
       console.error("Login error : ", error);
     }
@@ -60,8 +62,8 @@ const useLogin = () => {
         isFirst: isFirst,
         userKey: token,
       });
-
       updateUser2(token);
+      queryClient.invalidateQueries({ queryKey: ["data"] });
     } catch (error) {
       console.error("Login error : ", error);
     }
@@ -91,6 +93,7 @@ const useLogin = () => {
           isFirst: false,
         });
         // console.log("업데이트 정보 ! ", userInfo);
+        queryClient.invalidateQueries({ queryKey: ["data"] });
       })
       .catch((error: any) => {
         console.error("유저 정보 실패 : ", error);
@@ -116,7 +119,8 @@ const useLogin = () => {
           profileImg: res.data.data.profile,
           userId: res.data.data.id,
         });
-        console.log("업데이트 정보 ! ", userInfo);
+        // console.log("업데이트 정보 ! ", userInfo);
+        queryClient.invalidateQueries({ queryKey: ["data"] });
       })
       .catch((error: any) => {
         console.error("유저 정보 실패 : ", error);

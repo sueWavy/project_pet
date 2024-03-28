@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import useAddPet from "../hooks/useAddPet";
+import { useUserStore } from "../store/User";
+import useProfile from "../hooks/useProfile";
 
 export interface Pet {
   name: string;
@@ -13,7 +14,7 @@ interface AddInfoProps {
 }
 
 function AddPet({ handleAdd }: AddInfoProps) {
-  const { addPet } = useAddPet();
+  const { addPet } = useProfile();
 
   const pets: number = 1;
 
@@ -24,8 +25,6 @@ function AddPet({ handleAdd }: AddInfoProps) {
   const [petInfo, setPetInfo] = useState<Pet[]>([
     { name: "", kind: "", age: "", gender: "male" },
   ]);
-
-  console.log(petInfo);
 
   const handleChange = (
     e:
@@ -64,6 +63,7 @@ function AddPet({ handleAdd }: AddInfoProps) {
       return;
     }
     addPet(petInfo);
+    handleAdd((prev) => !prev);
   };
 
   // 중복 스타일

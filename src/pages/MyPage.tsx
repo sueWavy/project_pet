@@ -5,11 +5,13 @@ import useLogin from "../hooks/useLogin";
 import EditInfo from "../components/EditInfo";
 import useProfile from "../hooks/useProfile";
 import AddPet from "../components/AddPet";
+import { useGetData } from "../hooks/useGetData";
 
 export default function MyPage() {
   const userData = useUserStore((state) => state);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openAdd, setOpenAdd] = useState<boolean>(false);
+  const { data } = useGetData();
 
   const handleEdit = () => {
     setOpenEdit((prev) => !prev);
@@ -26,7 +28,7 @@ export default function MyPage() {
   useEffect(() => {
     updateUser(userData.userKey);
     updateUser;
-  }, []);
+  }, [data]);
 
   const { email, name, profileImg, feed, comment, join, pets } = useUserStore();
 
