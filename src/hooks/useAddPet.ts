@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useUserStore } from "../store/User";
-import { Pet } from "../components/AddInfo";
+import { Pet } from "../components/AddPet";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 

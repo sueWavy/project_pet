@@ -1,11 +1,17 @@
 import { useUserStore } from "../store/User";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import noProfile from "../assets/noProfile.jpg";
 import useLogin from "../hooks/useLogin";
+import EditInfo from "../components/EditInfo";
+import useProfile from "../hooks/useProfile";
 
 export default function MyPage() {
   const userData = useUserStore((state) => state);
+
+  console.log(userData);
+
   const { updateUser } = useLogin();
+  const { isEdit, handleEdit, deletePet } = useProfile();
 
   // 유저 정보 업데이트하기
   useEffect(() => {
@@ -37,11 +43,11 @@ export default function MyPage() {
   const acticityLevel = () => {
     if (activity < 9) {
       return "활동량이 낮아요 🥲";
-    } else if (activity > 10 && activity == 19) {
+    } else if (activity > 10 || activity == 19) {
       return "활동하기 시작했어요 🙂";
-    } else if (activity > 19 && activity == 20) {
+    } else if (activity > 19 || activity == 20) {
       return "활동 중이에요 😊";
-    } else if (activity > 29 && activity == 30) {
+    } else if (activity > 29 || activity == 30) {
       return "활발하게 이용해요 🥰";
     } else if (activity > 39) {
       return "멍미팅 커뮤니터 😎";
@@ -60,6 +66,7 @@ export default function MyPage() {
   return (
     <section className="w-full flex justify-center">
       <div className="flex justify-center w-3/4 dark:bg-slate-900 bg-white l:w-full">
+        {isEdit && <EditInfo />}
         <div className="flex-col justify-center items-center py-10 w-full">
           <div className="flex justify-center">
             <div>
@@ -69,9 +76,6 @@ export default function MyPage() {
                 alt="profile"
               />
               <div className="flex-col justify-center items-center text-center">
-                <button className="mt-7 bg-sky-300 px-5 py-1 rounded-full text-white hover:bg-sky-500 hover:text-white dark:text-black dark:bg-yellow-400 dark:hover:bg-yellow-200">
-                  프로필 사진 업로드
-                </button>
                 <h1 className="p-3 bg-blue-400 dark:bg-slate-600 rounded-2xl  text-white mt-10 w-72 mb-10 text-center text-xl font-bold">
                   {name}의 마이페이지
                 </h1>
@@ -95,7 +99,11 @@ export default function MyPage() {
                       {birthToAge(it.birth)} 세
                     </div>
                     <div className="space-x-2">
-                      <button className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none">
+                      <button
+                        onClick={() => deletePet(it.id)}
+                        className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none"
+                      >
+                        {it.id}
                         삭제
                       </button>
                     </div>
@@ -104,8 +112,11 @@ export default function MyPage() {
               </ul>
               <ul className={`${infoUl}`}>
                 <h3 className={`${infoBox} bg-yellow-400`}>내 회원정보</h3>
-                <button className={`${infoBtn} bg-yellow-200`}>
-                  이름 수정하기
+                <button
+                  onClick={handleEdit}
+                  className={`${infoBtn} bg-yellow-200`}
+                >
+                  프로필 수정하기
                 </button>
                 <li>이름 : {name}</li>
                 <li>이메일 : {email}</li>
@@ -116,7 +127,7 @@ export default function MyPage() {
                 <li>작성 게시글 : {feed}</li>
                 <li>작성 댓글 : {comment}</li>
                 <li>
-                  <span className="bg-orange-100 p-3 rounded-2xl">
+                  <span className="bg-orange-100 dark:bg-orange-300 p-3 rounded-2xl">
                     {acticityLevel()}
                   </span>
                 </li>

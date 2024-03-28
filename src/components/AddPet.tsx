@@ -11,7 +11,7 @@ export interface Pet {
   gender: string;
 }
 
-function AddInfo() {
+function AddPet() {
   const { logout } = useLogin();
   const { addPet } = useAddPet();
 
@@ -191,4 +191,4 @@ function AddInfo() {
   );
 }
 
-export default AddInfo;
+export default AddPet;

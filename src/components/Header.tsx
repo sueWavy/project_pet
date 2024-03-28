@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdPets } from "react-icons/md";
 import ThemeButton from "./ThemeBtn";
 import useLogin from "../hooks/useLogin";
-import AddInfo from "./AddInfo";
+import AddPet from "./AddPet";
 
 // 중복 스타일
 const hoverStyle = "cursor-pointer hover:text-2xl";
@@ -71,7 +71,7 @@ export default function Header() {
           마이페이지
         </li>
       </ul>
-      {isLogin && isFirst && <AddInfo />}
+      {isLogin && isFirst && <AddPet />}
     </header>
   );
 }
