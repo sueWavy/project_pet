@@ -8,10 +8,10 @@ import useProfile from "../hooks/useProfile";
 export default function MyPage() {
   const userData = useUserStore((state) => state);
 
-  console.log(userData);
-
   const { updateUser } = useLogin();
-  const { isEdit, handleEdit, deletePet } = useProfile();
+  const { isEdit, setIsEdit, deletePet } = useProfile();
+
+  console.log(isEdit);
 
   // 유저 정보 업데이트하기
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function MyPage() {
               <ul className={`${infoUl}`}>
                 <h3 className={`${infoBox} bg-yellow-400`}>내 회원정보</h3>
                 <button
-                  onClick={handleEdit}
+                  onClick={() => setIsEdit(true)}
                   className={`${infoBtn} bg-yellow-200`}
                 >
                   프로필 수정하기

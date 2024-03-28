@@ -13,9 +13,11 @@ export default function EditInfo() {
     name: baseName,
   });
 
-  console.log(userData);
+  // console.log(userData);
 
-  const { editUser, handleEdit } = useProfile();
+  const { editUser, setIsEdit, isEdit } = useProfile();
+
+  console.log(isEdit);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, files, value } = e.target as HTMLInputElement;
@@ -81,12 +83,18 @@ export default function EditInfo() {
             onChange={handleChange}
           />
         </li>
-        <li className="bg-green-400 p-4 mt-5 rounded-2xl">
+        <li className="flex justify-center space-x-3 mb-4 pt-4">
           <button
-            className="text-xl text-white"
+            className="bg-green-400 text-xl text-white px-4 py-2 rounded-2xl"
             onClick={() => editUser(userData)}
           >
             프로필 수정하기
+          </button>
+          <button
+            onClick={() => setIsEdit(false)}
+            className="bg-gray-400 text-xl text-white px-4 py-2 rounded-2xl"
+          >
+            돌아가기
           </button>
         </li>
       </ul>

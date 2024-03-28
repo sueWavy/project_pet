@@ -11,10 +11,6 @@ const useProfile = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const handleEdit = () => {
-    setIsEdit((prev) => !prev);
-  };
-
   /** 프로필 수정 기능(프로필 사진,이름) */
   const editUser = async (userData: any) => {
     await axios
@@ -35,7 +31,6 @@ const useProfile = () => {
       )
       .then((res) => console.log(res));
     setIsEdit(false);
-    navigate(`{/mypage/:${id}}`);
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
@@ -58,7 +53,7 @@ const useProfile = () => {
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
-  return { editUser, handleEdit, isEdit, deletePet };
+  return { editUser, setIsEdit, isEdit, deletePet };
 };
 
 export default useProfile;
