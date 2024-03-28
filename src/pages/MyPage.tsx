@@ -4,18 +4,28 @@ import noProfile from "../assets/noProfile.jpg";
 import useLogin from "../hooks/useLogin";
 import EditInfo from "../components/EditInfo";
 import useProfile from "../hooks/useProfile";
+import AddPet from "../components/AddPet";
 
 export default function MyPage() {
   const userData = useUserStore((state) => state);
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [openAdd, setOpenAdd] = useState<boolean>(false);
+
+  const handleEdit = () => {
+    setOpenEdit((prev) => !prev);
+  };
+
+  const handleAdd = () => {
+    setOpenAdd((prev) => !prev);
+  };
 
   const { updateUser } = useLogin();
-  const { isEdit, setIsEdit, deletePet } = useProfile();
-
-  console.log(isEdit);
+  const { deletePet } = useProfile();
 
   // 유저 정보 업데이트하기
   useEffect(() => {
     updateUser(userData.userKey);
+    updateUser;
   }, []);
 
   const { email, name, profileImg, feed, comment, join, pets } = useUserStore();
@@ -64,9 +74,10 @@ export default function MyPage() {
     "bg-green-200 px-5 py-1 rounded-full text-slate-600 hover:bg-green-500 hover:text-white";
 
   return (
-    <section className="w-full flex justify-center">
+    <section className="w-full flex justify-center relative">
+      {openEdit && <EditInfo setOpenEdit={setOpenEdit} />}
+      {openAdd && <AddPet handleAdd={handleAdd} />}
       <div className="flex justify-center w-3/4 dark:bg-slate-900 bg-white l:w-full">
-        {isEdit && <EditInfo />}
         <div className="flex-col justify-center items-center py-10 w-full">
           <div className="flex justify-center">
             <div>
@@ -84,11 +95,14 @@ export default function MyPage() {
           </div>
           <div className="flex justify-center items-center">
             <div className="grid grid-cols-3 gap-7 ml:grid-cols-2 sm:flex sm:flex-col">
-              <ul className={`${infoUl}`}>
+              <ul className={`${infoUl} overflow-scroll`}>
                 <h3 className={`${infoBox} bg-green-400`}>
                   함께 하고 있는 반려견
                 </h3>
-                <button className={`${infoBtn} bg-green-200`}>
+                <button
+                  onClick={handleAdd}
+                  className={`${infoBtn} bg-green-200`}
+                >
                   반려견 추가하기
                 </button>
                 {pets.map((it) => (
@@ -103,7 +117,6 @@ export default function MyPage() {
                         onClick={() => deletePet(it.id)}
                         className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none"
                       >
-                        {it.id}
                         삭제
                       </button>
                     </div>
@@ -113,7 +126,7 @@ export default function MyPage() {
               <ul className={`${infoUl}`}>
                 <h3 className={`${infoBox} bg-yellow-400`}>내 회원정보</h3>
                 <button
-                  onClick={() => setIsEdit(true)}
+                  onClick={() => handleEdit()}
                   className={`${infoBtn} bg-yellow-200`}
                 >
                   프로필 수정하기
@@ -124,8 +137,8 @@ export default function MyPage() {
               </ul>
               <ul className={`${infoUl}`}>
                 <h3 className={`${infoBox} bg-orange-400`}>내 활동내역</h3>
-                <li>작성 게시글 : {feed}</li>
-                <li>작성 댓글 : {comment}</li>
+                <li>작성했던 게시글 수 : {feed}</li>
+                <li>작성했던 댓글 수 : {comment}</li>
                 <li>
                   <span className="bg-orange-100 dark:bg-orange-300 p-3 rounded-2xl">
                     {acticityLevel()}

@@ -1,15 +1,10 @@
 import axios from "axios";
 import { useUserStore } from "../store/User";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const useProfile = () => {
-  const [isEdit, setIsEdit] = useState<boolean>(false);
   const token = useUserStore((state) => state.userKey);
-  const id = useUserStore((state) => state.userId);
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   /** 프로필 수정 기능(프로필 사진,이름) */
   const editUser = async (userData: any) => {
@@ -30,7 +25,6 @@ const useProfile = () => {
         }
       )
       .then((res) => console.log(res));
-    setIsEdit(false);
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
@@ -45,7 +39,7 @@ const useProfile = () => {
         },
         {
           headers: {
-            Authorizatiom: "bearer " + token,
+            Authorization: "bearer " + token,
           },
         }
       )
@@ -53,7 +47,7 @@ const useProfile = () => {
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
-  return { editUser, setIsEdit, isEdit, deletePet };
+  return { editUser, deletePet };
 };
 
 export default useProfile;

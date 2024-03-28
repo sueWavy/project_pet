@@ -1,7 +1,4 @@
-import { FaMinusCircle } from "react-icons/fa";
-import { FaPlusCircle } from "react-icons/fa";
 import React, { useRef, useState } from "react";
-import useLogin from "../hooks/useLogin";
 import useAddPet from "../hooks/useAddPet";
 
 export interface Pet {
@@ -11,11 +8,14 @@ export interface Pet {
   gender: string;
 }
 
-function AddPet() {
-  const { logout } = useLogin();
+interface AddInfoProps {
+  handleAdd: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function AddPet({ handleAdd }: AddInfoProps) {
   const { addPet } = useAddPet();
 
-  const [pets, setPets] = useState<number>(1);
+  const pets: number = 1;
 
   const petName = useRef<HTMLInputElement>(null);
   const petKind = useRef<HTMLInputElement>(null);
@@ -26,18 +26,6 @@ function AddPet() {
   ]);
 
   console.log(petInfo);
-
-  const onCrease = () => {
-    setPets((prev) => prev + 1);
-  };
-
-  const onDecrease = () => {
-    if (pets === 1) {
-      return;
-    } else {
-      setPets((prev) => prev - 1);
-    }
-  };
 
   const handleChange = (
     e:
@@ -79,33 +67,16 @@ function AddPet() {
   };
 
   // 중복 스타일
-  const InputBtn =
-    "dark:bg-black ml-2 flex justify-center items-center rounded-full bg-brand text-white";
-
   const InputStyle =
     "p-1 rounded-full placeholder:text-center text-center border-2 w-52 text-gray-400";
 
   return (
     <div className="fixed w-2/4 sm:w-3/4  max-h-custom top-36  dark:bg-slate-900 bg-white z-30 pt-20 pb-20 rounded-full shadow-md overflow-y-scroll">
       <form onSubmit={handleSubmit} className="text-center">
-        <p className="text-xl text-black dark:text-white">
-          처음 접속하신 견주님이시군요
-        </p>
         <h1 className="text-2xl mb-4 dark:text-white text-black">
           아래에 <b className="dark:text-yellow-300 text-blue-400">반려견</b>의
           정보를 입력해주세요
         </h1>
-        <div className="flex justify-center mb-4 items-center">
-          <p className="dark:text-white">반려견의 수 : </p>
-          <span className="ml-2 dark:text-white">{pets}</span>
-          <button className={InputBtn} onClick={onCrease}>
-            <FaPlusCircle />
-          </button>
-          <button className={InputBtn} onClick={onDecrease}>
-            <FaMinusCircle />
-          </button>
-        </div>
-
         {Array.from({ length: pets }, (_, index) => (
           <ul
             key={index}
@@ -113,7 +84,7 @@ function AddPet() {
           >
             <li className="flex justify-center items-center space-x-5">
               <span className="text-black dark:text-white">
-                🐶 반려견 {index + 1}
+                🐶 반려견의 성별
               </span>
               <select
                 required
@@ -181,7 +152,7 @@ function AddPet() {
           </button>
           <button
             className="dark:bg-orange-500 bg-brand text-white p-3 rounded-2xl hover:brightness-125"
-            onClick={logout}
+            onClick={() => handleAdd((prev) => !prev)}
           >
             돌아가기
           </button>

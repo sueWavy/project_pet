@@ -4,7 +4,11 @@ import { useUserStore } from "../store/User";
 import { FaImage } from "react-icons/fa";
 import useProfile from "../hooks/useProfile";
 
-export default function EditInfo() {
+interface EditInfoProps {
+  setOpenEdit: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function EditInfo({ setOpenEdit }: EditInfoProps) {
   const baseImg = useUserStore((state) => state.profileImg);
   const baseName = useUserStore((state) => state.name);
   const userInfo = useUserStore();
@@ -13,11 +17,7 @@ export default function EditInfo() {
     name: baseName,
   });
 
-  // console.log(userData);
-
-  const { editUser, setIsEdit, isEdit } = useProfile();
-
-  console.log(isEdit);
+  const { editUser } = useProfile();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, files, value } = e.target as HTMLInputElement;
@@ -86,12 +86,14 @@ export default function EditInfo() {
         <li className="flex justify-center space-x-3 mb-4 pt-4">
           <button
             className="bg-green-400 text-xl text-white px-4 py-2 rounded-2xl"
-            onClick={() => editUser(userData)}
+            onClick={() => {
+              editUser(userData), setOpenEdit((prev) => !prev);
+            }}
           >
             프로필 수정하기
           </button>
           <button
-            onClick={() => setIsEdit(false)}
+            onClick={() => setOpenEdit((prev) => !prev)}
             className="bg-gray-400 text-xl text-white px-4 py-2 rounded-2xl"
           >
             돌아가기

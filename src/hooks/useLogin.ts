@@ -76,7 +76,7 @@ const useLogin = () => {
         },
       })
       .then((res) => {
-        console.log("카카오 정보 : ", res.data);
+        // console.log("카카오 정보 : ", res.data);
         updateUserStore({
           email: res.data.data.email,
           name: res.data.data.name,
@@ -86,6 +86,9 @@ const useLogin = () => {
           comment: res.data.data.comments,
           profileImg: res.data.data.profile,
           userId: res.data.data.id,
+        });
+        updateUserStore({
+          isFirst: false,
         });
         // console.log("업데이트 정보 ! ", userInfo);
       })
