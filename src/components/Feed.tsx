@@ -182,7 +182,7 @@ export default function Feed({ data }: any) {
           {isEdit ? (
             <button
               onClick={() => onClickAddr()}
-              className="bg-sky-300 border-2 border-sky-500 dark:hover:bg-gray-600 
+              className="sm:text-xs sm:px-2 bg-sky-300 border-2 border-sky-500 dark:hover:bg-gray-600 
              dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white"
             >
               주소 검색
@@ -200,7 +200,7 @@ export default function Feed({ data }: any) {
           )}
 
           <button
-            className="sm:text-xs bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
+            className="sm:text-xs sm:px-2 bg-sky-300 border dark:border-none dark:hover:bg-gray-600  dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400 hover:text-white "
             onClick={handleOpen}
           >
             모임 장소
@@ -208,7 +208,7 @@ export default function Feed({ data }: any) {
           {isEdit ? (
             <button
               onClick={() => editFeed(id, editData)}
-              className="bg-green-400 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-green-500 hover:text-white "
+              className="sm:text-xs bg-green-400 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-green-500 hover:text-white "
             >
               수정하기
             </button>
@@ -223,9 +223,9 @@ export default function Feed({ data }: any) {
           {data.revise && (
             <button
               onClick={() => handleEdit()}
-              className=" bg-orange-300 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-orange-400 hover:text-white "
+              className="flex items-center bg-orange-300 border dark:border-none px-5 py-1 mb-2 rounded-full hover:bg-orange-400 hover:text-white "
             >
-              {isEdit ? <span>취소</span> : <MdEdit />}
+              {isEdit ? <span className="sm:text-xs">취소</span> : <MdEdit />}
             </button>
           )}
           {data.revise && (

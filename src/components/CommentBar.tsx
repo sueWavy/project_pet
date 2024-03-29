@@ -65,9 +65,9 @@ export default function CommentBar({ comments, feedId }: any) {
       <div className="flex justify-center mt-3 mb-2">
         <form
           onSubmit={handleSubmit}
-          className="flex w-4/5 justify-between rounded-xl bg-white h-9 overflow-hidden"
+          className="flex w-full justify-between rounded-xl bg-white h-20 overflow-hidden"
         >
-          <span className="w-1/6 border-r-2 border-gray-400 flex items-center justify-center">
+          <span className="w-1/6 border-r-2 border-gray-400 flex items-center justify-center p-1">
             {userKey ? userName : "사용자"}
           </span>
           <input

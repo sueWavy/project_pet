@@ -63,7 +63,6 @@ export default function Write() {
         writer: userName,
         [e.target.name]: e.target.value,
       }));
-      console.log(write);
     }
   };
 

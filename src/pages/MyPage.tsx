@@ -74,7 +74,7 @@ export default function MyPage() {
   const infoUl =
     "bg-white dark:bg-gray-700 dark:text-white  rounded-xl w-96 shadow-2xl text-lg h-80 text-center space-y-5";
   const infoBtn =
-    "bg-green-200 px-5 py-1 rounded-full text-slate-600 hover:bg-green-500 hover:text-white";
+    "bg-green-200 px-5 py-1 rounded-full text-slate-600 hover:text-white";
 
   return (
     <section className="w-full flex justify-center relative">
@@ -111,21 +111,21 @@ export default function MyPage() {
                 </h3>
                 <button
                   onClick={handleAdd}
-                  className={`${infoBtn} bg-green-200`}
+                  className={`${infoBtn} bg-green-200 hover:bg-green-500`}
                 >
                   반려견 추가하기
                 </button>
                 {pets.map((it) => (
                   <li key={it.id} className="flex justify-evenly px-3 py-1">
-                    <div className="flex-col">
+                    <div className="flex-col text-base">
                       <div>
                         🐶 {it.name} ( {it.breed} ) &nbsp;
-                        {it.gender === "male" ? "왕자" : "공주"} &nbsp; - &nbsp;
-                        {birthToAge(it.birth)} 세
+                        {it.gender === "male" ? "왕자" : "공주"} - &nbsp;
+                        {birthToAge(it.birth)}살
                       </div>
                       <button
                         onClick={() => deletePet(it.id)}
-                        className="px-2 w-12 bg-white rounded-full text-black text-sm border border-black dark:border-none"
+                        className="px-2 w-12 mt-1 bg-white rounded-full text-black text-sm border border-black dark:border-none"
                       >
                         삭제
                       </button>
@@ -137,7 +137,7 @@ export default function MyPage() {
                 <h3 className={`${infoBox} bg-yellow-400`}>내 회원정보</h3>
                 <button
                   onClick={() => handleEdit()}
-                  className={`${infoBtn} bg-yellow-200`}
+                  className={`${infoBtn} bg-yellow-200 hover:bg-yellow-400`}
                 >
                   프로필 수정하기
                 </button>

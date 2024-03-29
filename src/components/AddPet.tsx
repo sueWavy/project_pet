@@ -56,7 +56,7 @@ function AddPet({ handleAdd }: AddInfoProps) {
   };
 
   return (
-    <div className="fixed w-2/4 sm:w-3/4 max-h-custom top-36 dark:bg-slate-900 bg-white z-30 pt-20 pb-20 rounded-full shadow-md overflow-y-scroll">
+    <div className="fixed w-2/4 sm:w-3/4 s:w-full max-h-custom top-36 border border-black dark:bg-slate-900 bg-white z-30 pt-20 pb-20 rounded-full shadow-md overflow-y-scroll">
       <form onSubmit={handleSubmit} className="text-center">
         <h1 className="text-2xl mb-4 dark:text-white text-black">
           아래에 <b className="dark:text-yellow-300 text-blue-400">반려견</b>의

@@ -10,23 +10,22 @@ const useProfile = () => {
 
   /** 프로필 수정 기능(프로필 사진,이름) */
   const editUser = async (userData: any) => {
-    await axios
-      .post(
-        "http://43.201.39.118/api/info",
-        {
-          mode: "edit",
-          data: {
-            name: userData.name,
-            profile: userData.img,
-          },
+    await axios.post(
+      "http://43.201.39.118/api/info",
+      {
+        mode: "edit",
+        data: {
+          name: userData.name,
+          profile: userData.img,
         },
-        {
-          headers: {
-            Authorization: "bearer " + token,
-          },
-        }
-      )
-      .then((res) => console.log(res));
+      },
+      {
+        headers: {
+          Authorization: "bearer " + token,
+        },
+      }
+    );
+    // .then((res) => console.log(res));
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
@@ -48,22 +47,22 @@ const useProfile = () => {
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
+  /** 펫 등록 기능 */
   const addPet = async (petInfo: Pet) => {
     // console.log(petInfo);
-    await axios
-      .post(
-        "http://43.201.39.118/api/login",
-        {
-          mode: "additional",
-          list: [petInfo],
+    await axios.post(
+      "http://43.201.39.118/api/login",
+      {
+        mode: "additional",
+        list: [petInfo],
+      },
+      {
+        headers: {
+          Authorization: "bearer " + token,
         },
-        {
-          headers: {
-            Authorization: "bearer " + token,
-          },
-        }
-      )
-      .then((res) => console.log("펫 정보 등록", res.data));
+      }
+    );
+    // .then((res) => console.log("펫 정보 등록", res.data));
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
