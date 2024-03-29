@@ -1,8 +1,8 @@
 import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
 import { useState } from "react";
 import { useUserStore } from "../store/User";
-import Map from "../components/Map";
 import useWrite from "../hooks/useWrite";
+import Map from "../components/Map";
 
 // 피드 타입 지정
 export interface Feeds {

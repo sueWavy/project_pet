@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
-import noProfile from "../assets/noProfile.jpg";
 import { useUserStore } from "../store/User";
 import { FaImage } from "react-icons/fa";
+import noProfile from "../assets/noProfile.jpg";
 import useProfile from "../hooks/useProfile";
 
 interface EditInfoProps {

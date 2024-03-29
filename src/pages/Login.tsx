@@ -2,7 +2,6 @@ import dogVideo from "../assets/dog.mp4";
 import useLogin from "../hooks/useLogin";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { GoogleLogin } from "@react-oauth/google";
-import { useState } from "react";
 
 export default function Login() {
   // 카카오 로그인 hook에서 가져오기

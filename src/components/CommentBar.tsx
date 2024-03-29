@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useUserStore } from "../store/User";
-import useComment from "../hooks/useComment";
 import { TiDelete } from "react-icons/ti";
+import useComment from "../hooks/useComment";
 
 export default function CommentBar({ comments, feedId }: any) {
   const userKey = useUserStore((state) => state.userKey);
