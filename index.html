@@ -22,11 +22,5 @@
       strategy="beforeInteractive"
       src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=%VITE_KAKAOMAP_JAVASCRIPT_APP_KEY%&libraries=services,clusterer,drawing"
     ></script>
-    <script>
-      fetch("https://43.201.39.118/api/feed")
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Error:", error));
-    </script>
   </body>
 </html>
