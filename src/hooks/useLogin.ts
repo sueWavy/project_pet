@@ -22,6 +22,8 @@ const useLogin = () => {
         },
       });
 
+      // console.log("로그인 정보 :", res);
+
       const token = res.data.token;
       const isFirst = res.data.first;
 
@@ -29,6 +31,7 @@ const useLogin = () => {
         isLogin: true,
         isFirst: isFirst,
         userKey: token,
+        loginOf: "kakao",
       });
 
       updateUser(token);
@@ -61,8 +64,9 @@ const useLogin = () => {
         isLogin: true,
         isFirst: isFirst,
         userKey: token,
+        loginOf: "google",
       });
-      updateUser2(token);
+      updateUser(token);
       queryClient.invalidateQueries({ queryKey: ["data"] });
     } catch (error) {
       console.error("Login error : ", error);
@@ -78,7 +82,7 @@ const useLogin = () => {
         },
       })
       .then((res) => {
-        // console.log("카카오 정보 : ", res.data);
+        // console.log("로그인 정보 : ", res.data);
         updateUserStore({
           email: res.data.data.email,
           name: res.data.data.name,
@@ -92,34 +96,6 @@ const useLogin = () => {
         updateUserStore({
           isFirst: false,
         });
-        // console.log("업데이트 정보 ! ", userInfo);
-        queryClient.invalidateQueries({ queryKey: ["data"] });
-      })
-      .catch((error: any) => {
-        console.error("유저 정보 실패 : ", error);
-      });
-  };
-
-  const updateUser2 = async (token: any) => {
-    await axios
-      .get("http://43.201.39.118/api/me", {
-        headers: {
-          Authorization: "bearer " + token,
-        },
-      })
-      .then((res) => {
-        console.log("구글 정보 : ", res.data);
-        updateUserStore({
-          email: res.data.data.email,
-          name: res.data.data.name,
-          join: res.data.data.created,
-          feed: res.data.data.feeds,
-          pets: res.data.data.pets,
-          comment: res.data.data.comments,
-          profileImg: res.data.data.profile,
-          userId: res.data.data.id,
-        });
-        // console.log("업데이트 정보 ! ", userInfo);
         queryClient.invalidateQueries({ queryKey: ["data"] });
       })
       .catch((error: any) => {
@@ -142,7 +118,13 @@ const useLogin = () => {
     });
   };
 
-  return { kakaoLogin, logout, loginWithKakao, updateUser, googleLogin };
+  return {
+    loginWithKakao,
+    kakaoLogin,
+    googleLogin,
+    logout,
+    updateUser,
+  };
 };
 
 export default useLogin;

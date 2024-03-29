@@ -4,6 +4,7 @@ import { create } from "zustand";
 export interface UserStore {
   userId: any;
   isLogin: boolean;
+  loginOf: string;
   isFirst: boolean;
   userKey: string;
   profileImg: string;
@@ -32,6 +33,7 @@ interface UserStoreActions {
 const initialUserState: UserStore = {
   userId: "",
   isLogin: false,
+  loginOf: "",
   isFirst: true,
   userKey: "",
   profileImg: "",

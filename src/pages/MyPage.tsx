@@ -1,19 +1,19 @@
+import { useGetData } from "../hooks/useGetData";
 import { useUserStore } from "../store/User";
 import { useEffect, useState } from "react";
+import { RiKakaoTalkFill } from "react-icons/ri";
+import { FcGoogle } from "react-icons/fc";
+
 import noProfile from "../assets/noProfile.jpg";
-import useLogin from "../hooks/useLogin";
 import EditInfo from "../components/EditInfo";
 import useProfile from "../hooks/useProfile";
 import AddPet from "../components/AddPet";
-import { useGetData } from "../hooks/useGetData";
 
 export default function MyPage() {
   const userData = useUserStore((state) => state);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openAdd, setOpenAdd] = useState<boolean>(false);
   const { data } = useGetData();
-
-  console.log(userData);
 
   const handleEdit = () => {
     setOpenEdit((prev) => !prev);
@@ -23,16 +23,15 @@ export default function MyPage() {
     setOpenAdd((prev) => !prev);
   };
 
-  const { updateUser } = useLogin();
-  const { deletePet } = useProfile();
+  const { deletePet, getUserData } = useProfile();
 
   // 유저 정보 업데이트하기
   useEffect(() => {
-    updateUser(userData.userKey);
-    updateUser;
-  }, [data, userData.userKey, userData.pets]);
+    getUserData(userData.userKey);
+  }, [data, userData.userKey]);
 
-  const { email, name, profileImg, feed, comment, join, pets } = useUserStore();
+  const { email, name, profileImg, feed, comment, join, pets, loginOf } =
+    useUserStore();
 
   /** 생년월일 나이로 바꾸기 */
   const birthToAge = (birthDateString: string) => {
@@ -91,7 +90,14 @@ export default function MyPage() {
                 alt="profile"
               />
               <div className="flex-col justify-center items-center text-center">
-                <h1 className="p-3 bg-blue-400 dark:bg-slate-600 rounded-2xl  text-white mt-10 w-72 mb-10 text-center text-xl font-bold">
+                <h1 className="flex items-center justify-center p-3 bg-blue-400 dark:bg-slate-600 rounded-2xl  text-white mt-10 w-72 mb-10 text-center text-xl font-bold">
+                  <span className="mr-2">
+                    {loginOf == "kakao" ? (
+                      <RiKakaoTalkFill className="text-yellow-400 text-2xl" />
+                    ) : (
+                      <FcGoogle className="text-xl" />
+                    )}
+                  </span>
                   {name}의 마이페이지
                 </h1>
               </div>
@@ -107,19 +113,19 @@ export default function MyPage() {
                   onClick={handleAdd}
                   className={`${infoBtn} bg-green-200`}
                 >
-                  반려견 추가하기 (수리예정)
+                  반려견 추가하기
                 </button>
                 {pets.map((it) => (
-                  <li key={it.id} className="flex justify-evenly">
-                    <div>
-                      {it.name} ( {it.breed} ) &nbsp;
-                      {it.gender === "male" ? "왕자" : "공주"} &nbsp; - &nbsp;
-                      {birthToAge(it.birth)} 세
-                    </div>
-                    <div className="space-x-2">
+                  <li key={it.id} className="flex justify-evenly px-3 py-1">
+                    <div className="flex-col">
+                      <div>
+                        🐶 {it.name} ( {it.breed} ) &nbsp;
+                        {it.gender === "male" ? "왕자" : "공주"} &nbsp; - &nbsp;
+                        {birthToAge(it.birth)} 세
+                      </div>
                       <button
                         onClick={() => deletePet(it.id)}
-                        className="px-2 bg-white rounded-full text-black text-sm border border-black dark:border-none"
+                        className="px-2 w-12 bg-white rounded-full text-black text-sm border border-black dark:border-none"
                       >
                         삭제
                       </button>

@@ -5,6 +5,7 @@ import { Pet } from "../components/AddPet";
 
 const useProfile = () => {
   const token = useUserStore((state) => state.userKey);
+  const update = useUserStore((state) => state.updateUser);
   const queryClient = useQueryClient();
 
   /** 프로필 수정 기능(프로필 사진,이름) */
@@ -48,7 +49,7 @@ const useProfile = () => {
   };
 
   const addPet = async (petInfo: Pet) => {
-    console.log(petInfo);
+    // console.log(petInfo);
     await axios
       .post(
         "http://43.201.39.118/api/login",
@@ -66,7 +67,28 @@ const useProfile = () => {
     queryClient.invalidateQueries({ queryKey: ["data"] });
   };
 
-  return { editUser, deletePet, addPet };
+  const getUserData = async (token: string) => {
+    await axios
+      .get("http://43.201.39.118/api/me", {
+        headers: {
+          Authorization: "bearer " + token,
+        },
+      })
+      .then((res) =>
+        update({
+          email: res.data.data.email,
+          name: res.data.data.name,
+          join: res.data.data.created,
+          feed: res.data.data.feeds,
+          pets: res.data.data.pets,
+          comment: res.data.data.comments,
+          profileImg: res.data.data.profile,
+          userId: res.data.data.id,
+        })
+      );
+    queryClient.invalidateQueries({ queryKey: ["data"] });
+  };
+  return { editUser, deletePet, addPet, getUserData };
 };
 
 export default useProfile;

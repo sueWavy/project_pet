@@ -35,7 +35,6 @@ export default function Login() {
           <div className="flex items-center space-x-2 justify-center cursor-pointer">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
-                console.log(credentialResponse);
                 googleLogin(credentialResponse.credential);
               }}
               onError={() => {
