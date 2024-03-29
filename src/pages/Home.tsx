@@ -117,6 +117,8 @@ export default function Home() {
   // 페이지 입장시 상단으로
   useEffect(() => {
     scrollTop();
+    const $title = document.getElementsByTagName("title")[0];
+    $title.innerText = "멍미팅";
   }, []);
 
   if (isLoading) {

@@ -1,5 +1,5 @@
 import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserStore } from "../store/User";
 import useWrite from "../hooks/useWrite";
 import Map from "../components/Map";
@@ -30,6 +30,11 @@ export default function Write() {
   });
 
   const { addFeed } = useWrite();
+
+  useEffect(() => {
+    const $title = document.getElementsByTagName("title")[0];
+    $title.innerText = "멍미팅 글쓰기";
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

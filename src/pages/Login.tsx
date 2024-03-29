@@ -2,6 +2,7 @@ import dogVideo from "../assets/dog.mp4";
 import useLogin from "../hooks/useLogin";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { GoogleLogin } from "@react-oauth/google";
+import { useEffect } from "react";
 
 export default function Login() {
   // 카카오 로그인 hook에서 가져오기
@@ -11,6 +12,11 @@ export default function Login() {
   const handleLogin = () => {
     loginWithKakao();
   };
+
+  useEffect(() => {
+    const $title = document.getElementsByTagName("title")[0];
+    $title.innerText = "멍미팅 로그인";
+  }, []);
 
   // 중복 스타일
   const boxStyle =

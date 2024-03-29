@@ -25,6 +25,11 @@ export default function MyPage() {
 
   const { deletePet, getUserData } = useProfile();
 
+  useEffect(() => {
+    const $title = document.getElementsByTagName("title")[0];
+    $title.innerText = "멍미팅 마이페이지";
+  }, []);
+
   // 유저 정보 업데이트하기
   useEffect(() => {
     getUserData(userData.userKey);
