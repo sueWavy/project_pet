@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import noProfile from "../assets/noProfile.jpg";
 import { useUserStore } from "../store/User";
 import { FaImage } from "react-icons/fa";
