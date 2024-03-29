@@ -8,12 +8,15 @@ import noProfile from "../assets/noProfile.jpg";
 import EditInfo from "../components/EditInfo";
 import useProfile from "../hooks/useProfile";
 import AddPet from "../components/AddPet";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function MyPage() {
   const userData = useUserStore((state) => state);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openAdd, setOpenAdd] = useState<boolean>(false);
   const { data } = useGetData();
+
+  usePageTitle(`${userData.name}의 마이페이지`);
 
   const handleEdit = () => {
     setOpenEdit((prev) => !prev);
@@ -24,11 +27,6 @@ export default function MyPage() {
   };
 
   const { deletePet, getUserData } = useProfile();
-
-  useEffect(() => {
-    const $title = document.getElementsByTagName("title")[0];
-    $title.innerText = "멍미팅 마이페이지";
-  }, []);
 
   // 유저 정보 업데이트하기
   useEffect(() => {

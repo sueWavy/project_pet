@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar";
 import ScrollTopBtn from "../components/ScrollTopBtn";
 import noFeed from "../assets/noFeed.mp4";
 import Feed from "../components/Feed";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function Home() {
   const { data, isLoading, isError } = useGetData();
@@ -17,6 +18,8 @@ export default function Home() {
   const [searchTxt, setSearchTxt] = useState<string>("");
   const [searchCopy, setSearchCopy] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  usePageTitle("멍미팅");
 
   /** 좋아요(즐겨찾기) 기능 */
   const handleLikes = () => {
@@ -117,8 +120,6 @@ export default function Home() {
   // 페이지 입장시 상단으로
   useEffect(() => {
     scrollTop();
-    const $title = document.getElementsByTagName("title")[0];
-    $title.innerText = "멍미팅";
   }, []);
 
   if (isLoading) {

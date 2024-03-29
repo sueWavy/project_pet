@@ -1,8 +1,9 @@
 import { FaMapMarkerAlt, FaImage } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUserStore } from "../store/User";
 import useWrite from "../hooks/useWrite";
 import Map from "../components/Map";
+import usePageTitle from "../hooks/usePageTitle";
 
 // 피드 타입 지정
 export interface Feeds {
@@ -29,12 +30,9 @@ export default function Write() {
     content: "",
   });
 
-  const { addFeed } = useWrite();
+  usePageTitle("멍미팅 글쓰기");
 
-  useEffect(() => {
-    const $title = document.getElementsByTagName("title")[0];
-    $title.innerText = "멍미팅 글쓰기";
-  }, []);
+  const { addFeed } = useWrite();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
