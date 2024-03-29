@@ -54,7 +54,7 @@ const useProfile = () => {
         "http://43.201.39.118/api/login",
         {
           mode: "additional",
-          list: petInfo,
+          list: [petInfo],
         },
         {
           headers: {

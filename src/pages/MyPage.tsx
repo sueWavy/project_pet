@@ -30,7 +30,7 @@ export default function MyPage() {
   useEffect(() => {
     updateUser(userData.userKey);
     updateUser;
-  }, [data]);
+  }, [data, userData.userKey, userData.pets]);
 
   const { email, name, profileImg, feed, comment, join, pets } = useUserStore();
 
@@ -107,7 +107,7 @@ export default function MyPage() {
                   onClick={handleAdd}
                   className={`${infoBtn} bg-green-200`}
                 >
-                  반려견 추가하기
+                  반려견 추가하기 (수리예정)
                 </button>
                 {pets.map((it) => (
                   <li key={it.id} className="flex justify-evenly">
