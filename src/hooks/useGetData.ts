@@ -12,7 +12,7 @@ interface Data {
 
 const fetchData = async (token: string) => {
   const res = await axios.post(
-    "https://43.201.39.118/api/feed",
+    "http://43.201.39.118/api/feed",
     {
       mode: "list",
     },
