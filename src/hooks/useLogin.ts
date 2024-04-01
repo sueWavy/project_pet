@@ -113,7 +113,7 @@ const useLogin = () => {
     const { Kakao } = window;
 
     await Kakao.Auth.authorize({
-      redirectUri: "window.location.origin/kakao",
+      redirectUri: `${window.location.origin}/kakao`,
       state: "username",
     });
   };
