@@ -113,7 +113,7 @@ const useLogin = () => {
     const { Kakao } = window;
 
     await Kakao.Auth.authorize({
-      redirectUri: "https://mungdata.net/5173/kakao",
+      redirectUri: "https://localhost:5173/kakao",
       state: "username",
     });
   };
