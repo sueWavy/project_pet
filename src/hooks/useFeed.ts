@@ -19,7 +19,7 @@ const useFeed = () => {
 
     if (confirmDel) {
       await axios.post(
-        "http://43.201.39.118/api/feed",
+        "https://mungdata.net/api/feed",
         {
           mode: "delete",
           feed: feedId,
@@ -38,7 +38,7 @@ const useFeed = () => {
   /** 피드 수정 기능 (피드 id, 변경할 데이터) */
   const editFeed = async (feedId: any, editData: any) => {
     await axios.post(
-      "http://43.201.39.118/api/feed",
+      "https://mungdata.net/api/feed",
       {
         mode: "edit",
         feed: feedId,

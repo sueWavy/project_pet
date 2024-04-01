@@ -32,7 +32,7 @@ const useProfile = () => {
   /** 펫 삭제 기능 */
   const deletePet = async (petId: any) => {
     await axios.post(
-      "http://43.201.39.118/api/pet",
+      "https://mungdata.net/api/pet",
       {
         mode: "delete",
         pet: petId,

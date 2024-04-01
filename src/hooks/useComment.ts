@@ -9,7 +9,7 @@ const useComment = () => {
   /** 댓글 추가 기능 (피드 id, 댓글 내용) */
   const addComment = async (feedId: number, comment: string) => {
     await axios.post(
-      "http://43.201.39.118/api/comment",
+      "https://mungdata.net/api/comment",
       {
         mode: "write",
         data: {
@@ -30,7 +30,7 @@ const useComment = () => {
   /** 댓글 삭제 기능 (댓글 id) */
   const DelComment = async (commentId: number) => {
     await axios.post(
-      "http://43.201.39.118/api/comment",
+      "https://mungdata.net/api/comment",
       {
         mode: "delete",
         comment: commentId,
