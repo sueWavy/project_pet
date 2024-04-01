@@ -16,7 +16,7 @@ const useLogin = () => {
       form.append("mode", "kakao");
       form.append("code", code);
 
-      const res = await axios.post("http://43.201.39.118/api/login", form, {
+      const res = await axios.post("https://mungdata.net/api/login", form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -45,7 +45,7 @@ const useLogin = () => {
   const googleLogin = async (credentials: any) => {
     try {
       const res = await axios.post(
-        "http://43.201.39.118/api/login",
+        "https://mungdata.net/api/login",
         {
           mode: "google",
           code: credentials,
@@ -76,7 +76,7 @@ const useLogin = () => {
 
   const updateUser = async (token: any) => {
     await axios
-      .get("http://43.201.39.118/api/me", {
+      .get("https://mungdata.net/api/me", {
         headers: {
           Authorization: "bearer " + token,
         },

@@ -57,7 +57,7 @@ export default function MyPage() {
 
   // 활동량에 따라 등급 나누기
   const acticityLevel = () => {
-    if (activity < 9) {
+    if (activity <= 9) {
       return "활동량이 낮아요 🥲";
     } else if (activity > 10 || activity == 19) {
       return "활동하기 시작했어요 🙂";

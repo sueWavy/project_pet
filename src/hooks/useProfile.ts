@@ -11,7 +11,7 @@ const useProfile = () => {
   /** 프로필 수정 기능(프로필 사진,이름) */
   const editUser = async (userData: any) => {
     await axios.post(
-      "http://43.201.39.118/api/info",
+      "https://mungdata.net/api/info",
       {
         mode: "edit",
         data: {
@@ -51,7 +51,7 @@ const useProfile = () => {
   const addPet = async (petInfo: Pet) => {
     // console.log(petInfo);
     await axios.post(
-      "http://43.201.39.118/api/login",
+      "https://mungdata.net/api/login",
       {
         mode: "additional",
         list: [petInfo],
@@ -68,7 +68,7 @@ const useProfile = () => {
 
   const getUserData = async (token: string) => {
     await axios
-      .get("http://43.201.39.118/api/me", {
+      .get("https://mungdata.net/api/me", {
         headers: {
           Authorization: "bearer " + token,
         },

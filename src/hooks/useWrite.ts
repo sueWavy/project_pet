@@ -27,7 +27,7 @@ const useWrite = () => {
     }
 
     await axios.post(
-      "http://43.201.39.118/api/feed",
+      "https://mungdata.net/api/feed",
       {
         mode: "write",
         data: write,
