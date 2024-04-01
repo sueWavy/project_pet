@@ -22,7 +22,7 @@ const useLogin = () => {
         },
       });
 
-      // console.log("로그인 정보 :", res);
+      console.log("로그인 정보 :", res);
 
       const token = res.data.token;
       const isFirst = res.data.first;
