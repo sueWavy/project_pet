@@ -10,8 +10,6 @@ const useWrite = () => {
   const queryClient = useQueryClient();
 
   const addFeed = async (write: Feeds) => {
-    // console.log(write);
-
     if (write.title.length < 1) {
       alert("제목을 입력해주세요");
       return;
@@ -26,19 +24,20 @@ const useWrite = () => {
       return;
     }
 
-    await axios.post(
-      "https://mungdata.net/api/feed",
-      {
-        mode: "write",
-        data: write,
-      },
-      {
-        headers: {
-          Authorization: "bearer " + key,
+    await axios
+      .post(
+        "https://mungdata.net/api/feed",
+        {
+          mode: "write",
+          data: write,
         },
-      }
-    );
-    // .then((res) => console.log("게시글 작성", res, res.data));
+        {
+          headers: {
+            Authorization: "bearer " + key,
+          },
+        }
+      )
+      .then((res) => console.log("게시글 작성", res, res.data));
     queryClient.invalidateQueries({ queryKey: ["data"] });
     alert("게시글을 작성했습니다");
     navigate("/");
