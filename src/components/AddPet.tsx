@@ -5,6 +5,8 @@ interface AddInfoProps {
   handleAdd: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+//
+
 export interface Pet {
   name: string;
   kind: string;
