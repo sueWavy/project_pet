@@ -24,20 +24,19 @@ const useWrite = () => {
       return;
     }
 
-    await axios
-      .post(
-        "https://mungdata.net/api/feed",
-        {
-          mode: "write",
-          data: write,
+    await axios.post(
+      "https://mungdata.net/api/feed",
+      {
+        mode: "write",
+        data: write,
+      },
+      {
+        headers: {
+          Authorization: "bearer " + key,
         },
-        {
-          headers: {
-            Authorization: "bearer " + key,
-          },
-        }
-      )
-      .then((res) => console.log("게시글 작성", res, res.data));
+      }
+    );
+    // .then((res) => console.log("게시글 작성", res, res.data));
     queryClient.invalidateQueries({ queryKey: ["data"] });
     alert("게시글을 작성했습니다");
     navigate("/");

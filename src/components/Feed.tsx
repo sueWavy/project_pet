@@ -106,7 +106,7 @@ export default function Feed({ data }: any) {
       key={data.id}
       className={`${
         isEdit && "border-4 border-blue-400 dark:border-yellow-500"
-      } font-['Orbit-Regular'] w-3/4 s:w-full mb-10 bg-slate-100 flex-col justify-center items-center text-center rounded-2xl shadow-2xl overflow-hidden`}
+      } font-['Orbit-Regular'] w-3/5 sm:w-full mb-10 bg-slate-100 flex-col justify-center items-center text-center rounded-2xl shadow-2xl overflow-hidden`}
     >
       <li className="flex items-center justify-between py-2 px-6 bg-sky-200 dark:bg-black">
         <div className="flex items-center space-x-2">

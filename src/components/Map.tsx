@@ -49,7 +49,6 @@ function Map({ addStr }: MapProps) {
       }
     });
     // addStr(주소명) 바뀔 때 마다 실행
-    console.log("지도 : ", map, geocoder);
   }, [addStr]);
 
   // 지도 렌더링 div 반환
