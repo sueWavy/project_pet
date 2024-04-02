@@ -1,4 +1,3 @@
-import { useGetData } from "../hooks/useGetData";
 import { useUserStore } from "../store/User";
 import { useEffect, useState } from "react";
 import { RiKakaoTalkFill } from "react-icons/ri";
@@ -14,9 +13,10 @@ export default function MyPage() {
   const userData = useUserStore((state) => state);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openAdd, setOpenAdd] = useState<boolean>(false);
-  const { data } = useGetData();
 
   usePageTitle(`${userData.name}의 마이페이지`);
+
+  const { deletePet, getUserData } = useProfile();
 
   const handleEdit = () => {
     setOpenEdit((prev) => !prev);
@@ -26,12 +26,9 @@ export default function MyPage() {
     setOpenAdd((prev) => !prev);
   };
 
-  const { deletePet, getUserData } = useProfile();
-
-  // 유저 정보 업데이트하기
-  useEffect(() => {
+  const handleGetUserData = () => {
     getUserData(userData.userKey);
-  }, [data, userData.userKey]);
+  };
 
   const { email, name, profileImg, feed, comment, join, pets, loginOf } =
     useUserStore();
@@ -71,6 +68,10 @@ export default function MyPage() {
     return;
   };
 
+  useEffect(() => {
+    if (userData.userKey) handleGetUserData();
+  }, []);
+
   // 중복 스타일
   const infoBox =
     "h-14 flex justify-center items-center text-white text-xl font-bold";
@@ -81,8 +82,10 @@ export default function MyPage() {
 
   return (
     <section className="w-full flex justify-center relative">
-      {openEdit && <EditInfo setOpenEdit={setOpenEdit} />}
-      {openAdd && <AddPet handleAdd={handleAdd} />}
+      {openEdit && (
+        <EditInfo setOpenEdit={setOpenEdit} refresh={handleGetUserData} />
+      )}
+      {openAdd && <AddPet handleAdd={handleAdd} refresh={handleGetUserData} />}
       <div className="flex justify-center w-3/4 dark:bg-slate-900 bg-white l:w-full">
         <div className="flex-col justify-center items-center py-10 w-full">
           <div className="flex justify-center">
@@ -127,7 +130,7 @@ export default function MyPage() {
                         {birthToAge(it.birth)}살
                       </div>
                       <button
-                        onClick={() => deletePet(it.id)}
+                        onClick={() => deletePet(it.id, userData.userKey)}
                         className="px-2 w-12 mt-1 bg-white rounded-full text-black text-sm border border-black dark:border-none"
                       >
                         삭제

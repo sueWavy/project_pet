@@ -22,6 +22,7 @@ const fetchData = async (token: string) => {
       },
     }
   );
+  // console.log(res);
   return res.data;
 };
 

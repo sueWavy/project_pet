@@ -3,6 +3,7 @@ import useProfile from "../hooks/useProfile";
 
 interface AddInfoProps {
   handleAdd: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: () => void;
 }
 
 //
@@ -14,7 +15,7 @@ export interface Pet {
   gender: string;
 }
 
-function AddPet({ handleAdd }: AddInfoProps) {
+function AddPet({ handleAdd, refresh }: AddInfoProps) {
   const { addPet } = useProfile();
 
   const [petInfo, setPetInfo] = useState<Pet>({
@@ -38,7 +39,7 @@ function AddPet({ handleAdd }: AddInfoProps) {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!petInfo.name.trim()) {
@@ -53,8 +54,9 @@ function AddPet({ handleAdd }: AddInfoProps) {
       petAgeRef.current?.focus();
       return;
     }
-    addPet(petInfo);
+    await addPet(petInfo);
     handleAdd((prev) => !prev);
+    refresh();
   };
 
   return (

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useUserStore } from "../store/User";
 import { FaImage } from "react-icons/fa";
 import noProfile from "../assets/noProfile.jpg";
@@ -6,9 +6,10 @@ import useProfile from "../hooks/useProfile";
 
 interface EditInfoProps {
   setOpenEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: () => void;
 }
 
-export default function EditInfo({ setOpenEdit }: EditInfoProps) {
+export default function EditInfo({ setOpenEdit, refresh }: EditInfoProps) {
   const baseImg = useUserStore((state) => state.profileImg);
   const baseName = useUserStore((state) => state.name);
   const userInfo = useUserStore();
@@ -18,6 +19,12 @@ export default function EditInfo({ setOpenEdit }: EditInfoProps) {
   });
 
   const { editUser } = useProfile();
+
+  const handleEdit = async () => {
+    await editUser(userData);
+    setOpenEdit((prev) => !prev);
+    refresh();
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, files, value } = e.target as HTMLInputElement;
@@ -99,9 +106,7 @@ export default function EditInfo({ setOpenEdit }: EditInfoProps) {
             id="editBtn"
             className="bg-green-400 text-xl text-white px-4 py-2 rounded-2xl sm:text-sm"
             disabled={lengthCheck(userData.name)}
-            onClick={() => {
-              editUser(userData), setOpenEdit((prev) => !prev);
-            }}
+            onClick={handleEdit}
           >
             프로필 수정하기
           </button>
