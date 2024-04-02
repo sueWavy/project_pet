@@ -39,7 +39,7 @@ const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/*",
     element: <App />,
     errorElement: <NotFound />,
     children: [
