@@ -20,11 +20,12 @@ export default function Footer() {
   return (
     <div className="flex justify-evenly  items-center w-full bg-slate-200 h-36 dark:bg-slate-800 dark:text-white md:flex-col">
       <div className="text-center">
-        <p className="sm:text-sm">
-          <b className="text-xl sm:text-base">MungMeeting</b>은 반려견을 키우는
+        <p className="sm:text-sm mobile:text-xs">
+          <b className="text-xl sm:text-base">MungMeeting</b>은 반려견을 키우는{" "}
+          <br />
           견주들을 위한 커뮤니티 사이트 프로젝트입니다.
         </p>
-        <div className="flex items-center space-x-3 mt-2 text-2xl">
+        <div className="flex items-center space-x-3 mt-2 text-2xl mobile:text-xs">
           <span className="sm:hidden text-lg">사용 기술 스택</span>
           <SiVite /> <SiReact /> <SiReactquery /> <SiTypescript />
           <SiReactrouter /> <SiAxios /> <SiYarn /> <SiGithub /> <SiNotion />{" "}

@@ -178,7 +178,7 @@ export default function Feed({ data }: any) {
         )}
       </li>
       <li className="p-2 text-white ">
-        <div className="flex justify-center space-x-5">
+        <div className="flex justify-center space-x-5 mobile:text-xs">
           {isEdit ? (
             <button
               onClick={() => onClickAddr()}

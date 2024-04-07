@@ -28,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             onChange={handleSortChange}
             name="searchFilter"
             id="searchFilter"
-            className="bg-inherit text-white py-1 px-4 rounded-l-2xl appearance-none cursor-pointer outline-none text-center border-none"
+            className="bg-inherit text-white py-1 px-4 rounded-l-2xl appearance-none cursor-pointer outline-none text-center border-none mobile:px-1 "
           >
             <option value={"lastest"}>최신순</option>
             <option value={"oldest"}>오래된순</option>
@@ -40,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             name="searchTxt"
             onChange={handleCopy}
             onKeyDown={handleKeyPress}
-            className="py-1 px-4 placeholder:p-3 bg-white border-none outline-none"
+            className="py-1 px-4 placeholder:p-3 bg-white border-none outline-none mobile:placeholder:text-base"
             placeholder="메이트를 찾아볼까요?"
           />
           <button
@@ -58,7 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </div>
         <button
           onClick={handleLikes}
-          className="ml-3 bg-sky-600 py-1 px-4 text-white rounded-2xl dark:bg-gray-800"
+          className="ml-3 bg-sky-600 py-1 px-4 text-white rounded-2xl dark:bg-gray-800 mobile:px-2"
         >
           <span
             className={
