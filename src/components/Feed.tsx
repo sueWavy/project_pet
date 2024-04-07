@@ -195,7 +195,7 @@ export default function Feed({ data }: any) {
               }  bg-sky-300 border dark:border-none dark:hover:bg-gray-600 
              dark:bg-gray-400 px-5 py-1 mb-2 rounded-full hover:bg-sky-400`}
             >
-              ♥
+              <FaHeart />
             </button>
           )}
 
