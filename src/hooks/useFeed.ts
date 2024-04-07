@@ -37,20 +37,21 @@ const useFeed = () => {
 
   /** 피드 수정 기능 (피드 id, 변경할 데이터) */
   const editFeed = async (feedId: any, editData: any) => {
-    await axios.post(
-      "https://mungdata.net/api/feed",
-      {
-        mode: "edit",
-        feed: feedId,
-        data: editData,
-      },
-      {
-        headers: {
-          Authorization: "bearer " + editData.key,
+    await axios
+      .post(
+        "https://mungdata.net/api/feed",
+        {
+          mode: "edit",
+          feed: feedId,
+          data: editData,
         },
-      }
-    );
-    // .then((res) => console.log(res, res.data));
+        {
+          headers: {
+            Authorization: "bearer " + editData.key,
+          },
+        }
+      )
+      .then((res) => console.log(res, res.data));
     queryClient.invalidateQueries({ queryKey: ["data"] });
     setIsEdit(false);
   };

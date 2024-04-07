@@ -1,4 +1,5 @@
 import React from "react";
+import { CiSearch } from "react-icons/ci";
 
 interface SearchBarProps {
   isLikes: boolean;
@@ -44,9 +45,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
           />
           <button
             onClick={handleClick}
-            className="bg-inherit text-white py-1 px-4 rounded-r-2xl "
+            className="bg-inherit text-white py-1 px-4 rounded-r-2xl mobile:hidden"
           >
             검색
+          </button>
+          <button
+            onClick={handleClick}
+            className="bg-inherit text-white py-1 px-4 rounded-r-2xl hidden mobile:inline"
+          >
+            <CiSearch />
           </button>
         </div>
         <button

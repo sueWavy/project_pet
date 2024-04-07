@@ -28,6 +28,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        mobile: { max: "455px" },
         s: { max: "628px" },
         sm: { max: "840px" },
         md: { max: "1070px" },
