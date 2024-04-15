@@ -1,5 +1,5 @@
 <div align="center">
-
+  
 ![image](https://github.com/sueWavy/project_pet/assets/148526219/ccbd8fd9-a8f4-4b0d-833f-18343e0c4433)
 
 # 반려견 커뮤니티 멍미팅 !
@@ -8,12 +8,107 @@
 프로젝트 인원은 프론트인 저와 백엔드 한 명으로 구성했으며 슬랙과 노션을 이용하여 API 명세서를 작성하고 소통하며 진행했습니다. <br/>
 ( 개발 기간 : 2024.03.04 ~ 04.01 )
 
-## Stacks
+## 💻 사용 기술 스택
+
+</div>
+
+<div align="center">
+  
 ![image](https://github.com/sueWavy/project_pet/assets/148526219/0e605e5d-aafe-4cbb-869b-36ef1167ce58)
 
-## Tree
-<img width="436" alt="image" src="https://github.com/sueWavy/project_pet/assets/148526219/54ebb5d2-27bc-4b14-acf7-42bbacc94296">
 
+## 🗂️ 폴더 구조 트리
+
+</div>
+
+```
+📦 
+├─ .eslintrc.cjs
+├─ .gitignore
+├─ README.md
+├─ index.html
+├─ package.json
+├─ postcss.config.js
+├─ public
+│  ├─ thumbnail.png
+│  ├─ favicon.png
+│  └─ vite.svg
+├─ src
+│  ├─ App.css
+│  ├─ App.tsx
+│  ├─ assets
+│  │  ├─ dog.mp4
+│  │  ├─ noFeed.mp4
+│  │  ├─ noPage.mp4
+│  │  ├─ noProfile.jpg
+│  │  ├─ react.svg
+│  │  ├─ writeDark.png
+│  │  └─ zustand.png
+│  ├─ components
+│  │  ├─ AddPet.tsx
+│  │  ├─ CommentBar.tsx
+│  │  ├─ CustomPagination.tsx
+│  │  ├─ EditInfo.tsx
+│  │  ├─ Feed.tsx
+│  │  ├─ Footer.tsx
+│  │  ├─ Header.tsx
+│  │  ├─ Map.tsx
+│  │  ├─ ScrollTopBtn.tsx
+│  │  ├─ SearchBar.tsx
+│  │  ├─ ThemeBtn.tsx
+│  │  └─ weather
+│  │     ├─ CitySelector.tsx
+│  │     ├─ Loader.tsx
+│  │     └─ WeatherBar.tsx
+│  ├─ hooks
+│  │  ├─ useComment.ts
+│  │  ├─ useFeed.ts
+│  │  ├─ useGetData.ts
+│  │  ├─ useLikes.ts
+│  │  ├─ useLogin.ts
+│  │  ├─ usePageTitle.ts
+│  │  ├─ useProfile.ts
+│  │  └─ useWrite.ts
+│  ├─ index.css
+│  ├─ main.tsx
+│  ├─ pages
+│  │  ├─ Home.tsx
+│  │  ├─ Kakao.tsx
+│  │  ├─ Login.tsx
+│  │  ├─ MyPage.tsx
+│  │  ├─ NotFound.tsx
+│  │  ├─ ProtectRoute.ts
+│  │  └─ Write.tsx
+│  ├─ store
+│  │  └─ User.ts
+│  └─ vite-env.d.ts
+├─ tailwind.config.js
+├─ tsconfig.json
+├─ tsconfig.node.json
+├─ vercel.json
+├─ vite.config.ts
+├─ vite
+│  ├─ .gitignore
+│  ├─ README.md
+│  ├─ index.html
+│  ├─ package.json
+│  ├─ pnpm-lock.yaml
+│  ├─ public
+│  │  └─ vite.svg
+│  ├─ src
+│  │  ├─ App.vue
+│  │  ├─ assets
+│  │  │  └─ vue.svg
+│  │  ├─ components
+│  │  │  └─ HelloWorld.vue
+│  │  ├─ main.js
+│  │  └─ style.css
+│  └─ vite.config.js
+└─ yarn.lock
+```
+
+<div align="center">
+  
 ## 주요 기능 구현
 ### 소셜 로그인
 ![Apr-15-2024 15-31-50](https://github.com/sueWavy/project_pet/assets/148526219/15aebf11-d9d7-4b1e-a507-a6f31d16a6b7) <br/><br/>
