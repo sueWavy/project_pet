@@ -16,7 +16,7 @@
 ![image](https://github.com/sueWavy/project_pet/assets/148526219/0e605e5d-aafe-4cbb-869b-36ef1167ce58)
 
 
-## 🗂️ 폴더 구조 트리
+## 🗂️ 폴더 트리 구조
 
 </div>
 
